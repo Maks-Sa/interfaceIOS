@@ -19,30 +19,37 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cle-Hd-h5h">
                                 <rect key="frame" x="7" y="35" width="415" height="857"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Login" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bza-L4-ZwN">
-                                        <rect key="frame" x="164" y="362.66666666666669" width="100" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ID" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bza-L4-ZwN">
+                                        <rect key="frame" x="116.66666666666669" y="362.66666666666669" width="195" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="fYd-1K-Mzk"/>
+                                            <constraint firstAttribute="width" constant="195" id="fYd-1K-Mzk"/>
                                         </constraints>
                                         <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDV-Ty-q3B">
-                                        <rect key="frame" x="195.66666666666666" y="460.66666666666669" width="37" height="30"/>
-                                        <state key="normal" title="Enter"/>
+                                    <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDV-Ty-q3B">
+                                        <rect key="frame" x="116.66666666666669" y="460.66666666666669" width="195" height="30"/>
+                                        <color key="backgroundColor" red="0.29099708800000001" green="0.45513165" blue="0.64619600769999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="195" id="df9-St-cLl"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.29099708800000001" green="0.45513165" blue="0.64619600769999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Sign in">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="buttonPressedStartForm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1QZ-jO-J2f"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k4z-Zd-6gq">
-                                        <rect key="frame" x="164" y="411.66666666666669" width="100" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="k4z-Zd-6gq">
+                                        <rect key="frame" x="116.66666666666669" y="411.66666666666669" width="195" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="Xn4-BK-mZs"/>
+                                            <constraint firstAttribute="width" constant="195" id="Xn4-BK-mZs"/>
                                         </constraints>
                                         <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" textContentType="password"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VKlogo" translatesAutoresizingMaskIntoConstraints="NO" id="Jsy-BM-lET">
                                         <rect key="frame" x="189" y="297.66666666666669" width="50" height="50"/>
@@ -51,16 +58,25 @@
                                             <constraint firstAttribute="width" constant="50" id="hfB-ng-XlQ"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mH-BY-HQz">
+                                        <rect key="frame" x="116.66666666666669" y="505.66666666666663" width="195" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="195" id="7Sh-hd-8cn"/>
+                                        </constraints>
+                                        <state key="normal" title="Forgot your id or password?"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="YDV-Ty-q3B" secondAttribute="bottom" constant="20" id="2D9-vn-ZBe"/>
+                                    <constraint firstAttribute="bottom" secondItem="6mH-BY-HQz" secondAttribute="bottom" constant="20" id="3e7-LI-y1m"/>
                                     <constraint firstItem="k4z-Zd-6gq" firstAttribute="top" secondItem="bza-L4-ZwN" secondAttribute="bottom" constant="15" id="LLU-Mw-eeE"/>
                                     <constraint firstItem="YDV-Ty-q3B" firstAttribute="centerX" secondItem="Cle-Hd-h5h" secondAttribute="centerX" id="N3J-LQ-Co9"/>
                                     <constraint firstItem="Jsy-BM-lET" firstAttribute="centerX" secondItem="Cle-Hd-h5h" secondAttribute="centerX" id="QwW-LI-jXp"/>
                                     <constraint firstItem="bza-L4-ZwN" firstAttribute="top" secondItem="Jsy-BM-lET" secondAttribute="bottom" constant="15" id="c5h-Jv-2jf"/>
+                                    <constraint firstItem="6mH-BY-HQz" firstAttribute="centerX" secondItem="Cle-Hd-h5h" secondAttribute="centerX" id="jNM-xz-n8x"/>
                                     <constraint firstItem="YDV-Ty-q3B" firstAttribute="top" secondItem="k4z-Zd-6gq" secondAttribute="bottom" constant="15" id="jsh-IU-2rd"/>
                                     <constraint firstItem="bza-L4-ZwN" firstAttribute="centerX" secondItem="Cle-Hd-h5h" secondAttribute="centerX" id="lBM-ID-5tV"/>
                                     <constraint firstItem="k4z-Zd-6gq" firstAttribute="centerY" secondItem="Cle-Hd-h5h" secondAttribute="centerY" id="m2k-Ro-K6O"/>
+                                    <constraint firstItem="6mH-BY-HQz" firstAttribute="top" secondItem="YDV-Ty-q3B" secondAttribute="bottom" constant="15" id="pes-Sb-kW7"/>
                                     <constraint firstItem="k4z-Zd-6gq" firstAttribute="centerX" secondItem="Cle-Hd-h5h" secondAttribute="centerX" id="ufL-nf-dUI"/>
                                 </constraints>
                             </scrollView>
