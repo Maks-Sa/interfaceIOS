@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0080CEB9257F9C51007BA2F0 /* Less1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Less1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0080CEB9257F9C51007BA2F0 /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0080CEBC257F9C51007BA2F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0080CEBE257F9C51007BA2F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0080CEC0257F9C51007BA2F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +40,7 @@
 		0080CEB0257F9C50007BA2F0 = {
 			isa = PBXGroup;
 			children = (
-				0080CEBB257F9C51007BA2F0 /* Less1 */,
+				0080CEBB257F9C51007BA2F0 /* VKClient */,
 				0080CEBA257F9C51007BA2F0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,12 +48,12 @@
 		0080CEBA257F9C51007BA2F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0080CEB9257F9C51007BA2F0 /* Less1.app */,
+				0080CEB9257F9C51007BA2F0 /* VKClient.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0080CEBB257F9C51007BA2F0 /* Less1 */ = {
+		0080CEBB257F9C51007BA2F0 /* VKClient */ = {
 			isa = PBXGroup;
 			children = (
 				0080CEBC257F9C51007BA2F0 /* AppDelegate.swift */,
@@ -64,15 +64,15 @@
 				0080CEC7257F9C52007BA2F0 /* LaunchScreen.storyboard */,
 				0080CECA257F9C52007BA2F0 /* Info.plist */,
 			);
-			path = Less1;
+			path = VKClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0080CEB8257F9C51007BA2F0 /* Less1 */ = {
+		0080CEB8257F9C51007BA2F0 /* VKClient */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0080CECD257F9C52007BA2F0 /* Build configuration list for PBXNativeTarget "Less1" */;
+			buildConfigurationList = 0080CECD257F9C52007BA2F0 /* Build configuration list for PBXNativeTarget "VKClient" */;
 			buildPhases = (
 				0080CEB5257F9C51007BA2F0 /* Sources */,
 				0080CEB6257F9C51007BA2F0 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = Less1;
+			name = VKClient;
 			productName = Less1;
-			productReference = 0080CEB9257F9C51007BA2F0 /* Less1.app */;
+			productReference = 0080CEB9257F9C51007BA2F0 /* VKClient.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +101,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0080CEB4257F9C50007BA2F0 /* Build configuration list for PBXProject "Less1" */;
+			buildConfigurationList = 0080CEB4257F9C50007BA2F0 /* Build configuration list for PBXProject "VKClient" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,7 +114,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0080CEB8257F9C51007BA2F0 /* Less1 */,
+				0080CEB8257F9C51007BA2F0 /* VKClient */,
 			);
 		};
 /* End PBXProject section */
@@ -288,7 +288,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3PWBY4R56;
-				INFOPLIST_FILE = Less1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VKClient/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,7 +307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N3PWBY4R56;
-				INFOPLIST_FILE = Less1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/VKClient/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0080CEB4257F9C50007BA2F0 /* Build configuration list for PBXProject "Less1" */ = {
+		0080CEB4257F9C50007BA2F0 /* Build configuration list for PBXProject "VKClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0080CECB257F9C52007BA2F0 /* Debug */,
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0080CECD257F9C52007BA2F0 /* Build configuration list for PBXNativeTarget "Less1" */ = {
+		0080CECD257F9C52007BA2F0 /* Build configuration list for PBXNativeTarget "VKClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0080CECE257F9C52007BA2F0 /* Debug */,
