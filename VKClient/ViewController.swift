@@ -71,8 +71,10 @@ class ViewController: UIViewController {
 
     }
     
+    @IBOutlet weak var buttonStartForm: UIButton!
     @IBOutlet weak var scrollViewStartForm: UIScrollView!
     @IBOutlet weak var loginInputStartForm: UITextField!
     @IBOutlet weak var passwordInputStartForm: UITextField!
+   
 }
 
