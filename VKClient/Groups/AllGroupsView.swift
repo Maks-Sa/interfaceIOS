@@ -13,9 +13,9 @@ class AllGroupsView: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     @IBOutlet public weak var tableAllView: UITableView!
     // Готовим данные для таблицы
-    var allGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bkicon.jpg")!,infoGroup: "Готовим 100% говядину на огне")),
-                                     (groupsVK(nameGroup: "GeekBrains", iconGroup: UIImage(named: "gbicon.jpg")!, infoGroup: "Учись, развивайся, стажируйся, зарабатывай!")),
-                                     (groupsVK(nameGroup: "MARVEL/DC", iconGroup: UIImage(named: "mdicon.jpg")!, infoGroup: "Только уникальный контент")),
+    var allGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0.jpg")!,infoGroup: "Готовим 100% говядину на огне")),
+                                     (groupsVK(nameGroup: "GeekBrains", iconGroup: UIImage(named: "gb0.jpg")!, infoGroup: "Учись, развивайся, стажируйся, зарабатывай!")),
+                                     (groupsVK(nameGroup: "MARVEL/DC", iconGroup: UIImage(named: "md0.jpg")!, infoGroup: "Только уникальный контент")),
                                      (groupsVK(nameGroup: "СЛОТ", iconGroup: UIImage(named: "sloticon.jpg")!, infoGroup: "Слот» — российская альтернативная рок-группа ")),
                                      (groupsVK(nameGroup: "Федерация регби Санкт-Петербурга", iconGroup: UIImage(named: "rugby")!, infoGroup: "Все о петербургском регби")),
                                      (groupsVK(nameGroup: "Кованые топоры | УРМ «АНИКА»", iconGroup: UIImage(named: "anika")!, infoGroup: "Топоры")),
