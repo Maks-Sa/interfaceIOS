@@ -6,18 +6,29 @@
 //
 
 import UIKit
-
+// класс для групп
 class groupsVK {
     let nameGroup : String
     let iconGroup : UIImage
     let infoGroup : String
-    let contaсtGroup : String
-    init(nameGroup: String, iconGroup : UIImage, infoGroup : String, contaсtGroup : String) {
+
+    init(nameGroup: String, iconGroup: UIImage, infoGroup: String) {
         self.nameGroup = nameGroup
         self.iconGroup = iconGroup
         self.infoGroup = infoGroup
-        self.contaсtGroup = contaсtGroup
+  
     }
     
     
 }
+
+
+extension groupsVK: Equatable {}
+func ==(lhs: groupsVK, rhs: groupsVK) -> Bool {
+    let areEqual = lhs.nameGroup == rhs.nameGroup &&
+        lhs.infoGroup == rhs.infoGroup &&
+        lhs.iconGroup.isEqual(rhs.iconGroup)
+    return areEqual
+    
+}
+
