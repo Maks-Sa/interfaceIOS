@@ -16,7 +16,7 @@ class AllGroupsView: UIViewController, UITableViewDataSource, UITableViewDelegat
     var allGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне")),
                                      (groupsVK(nameGroup: "GeekBrains", iconGroup: UIImage(named: "gb0")!, infoGroup: "Учись, развивайся, стажируйся, зарабатывай!")),
                                      (groupsVK(nameGroup: "MARVEL/DC", iconGroup: UIImage(named: "md0")!, infoGroup: "Только уникальный контент")),
-                                     (groupsVK(nameGroup: "СЛОТ", iconGroup: UIImage(named: "sloticon")!, infoGroup: "Слот» — российская альтернативная рок-группа ")),
+                                     (groupsVK(nameGroup: "СЛОТ", iconGroup: UIImage(named: "slot")!, infoGroup: "Слот» — российская альтернативная рок-группа ")),
                                      (groupsVK(nameGroup: "Федерация регби Санкт-Петербурга", iconGroup: UIImage(named: "rugby")!, infoGroup: "Все о петербургском регби")),
                                      (groupsVK(nameGroup: "Кованые топоры | УРМ «АНИКА»", iconGroup: UIImage(named: "anika")!, infoGroup: "Топоры")),
                                      (groupsVK(nameGroup: "BIG GEEK»", iconGroup: UIImage(named: "biggeek")!, infoGroup: "Гаджеты, фильмы, сериалы, игры. Без ерунды."))
