@@ -10,15 +10,16 @@ import UIKit
 class MyGroupsCell: UITableViewCell {
 
   
-    @IBOutlet weak var myGroupsIcon: UIImageView!
+
     @IBOutlet weak var myGroupsInfo: UILabel!
     @IBOutlet weak var myGroupsName: UILabel!
+    @IBOutlet weak var myGroupsIcon: IconSettings!
     
     // Метод для заполнения ячейки данными
     func setData(groupName: String, groupInfo: String, groupIcon: UIImage){
         myGroupsName.text = groupName
         myGroupsInfo.text = groupInfo
-        myGroupsIcon.image = groupIcon
+        myGroupsIcon.imageView.image = groupIcon
     }
     
     override func awakeFromNib() {

@@ -12,13 +12,13 @@ class AllGroupsCell: UITableViewCell {
     
     @IBOutlet weak var allGroupsInfo: UILabel!
     @IBOutlet weak var allGroupsName: UILabel!
-    @IBOutlet weak var allGroupsIcon: UIImageView!
+    @IBOutlet weak var allGroupsIcon: IconSettings!
     
     // Метод для заполнения ячейки данными
     func setData(groupName: String, groupInfo: String, groupIcon: UIImage){
         allGroupsName.text = groupName
         allGroupsInfo.text = groupInfo
-        allGroupsIcon.image = groupIcon
+        allGroupsIcon.imageView.image = groupIcon
     }
     
     

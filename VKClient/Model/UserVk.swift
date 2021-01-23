@@ -9,27 +9,74 @@ import UIKit
 enum gender {
    case male, female
 }
+//class userVK {
+//    let name : String
+//    let surname: String
+//    let avatar : UIImage
+//    let photo : [UIImage]
+//    let gender : gender
+//    let idGroup : Int
+//    let city: String
+//    init(name: String, surname: String, avatar : UIImage, photo : [UIImage], gender: gender, idGroup : Int, city: String) {
+//        self.name = name
+//        self.surname = surname
+//        self.avatar = avatar
+//        self.photo = photo
+//        self.gender = gender
+//        self.idGroup = idGroup
+//        self.city = city
+//    }
+//    init(){
+//        self.name = ""
+//        self.surname = ""
+//        self.avatar = UIImage()
+//        self.photo = [UIImage()]
+//        self.gender = .male
+//        self.idGroup = 0
+//        self.city = ""
+//    }
+//
+//
+//}
+
+
 class userVK {
     let name : String
-    let sername: String
+    let surname: String
     let avatar : UIImage
-    let photo : [UIImage]
+    var photo : [photoAlbum]?
     let gender : gender
     let idGroup : Int
     let city: String
-    init(name: String, sername: String, avatar : UIImage, photo : [UIImage], gender: gender, idGroup : Int, city: String) {
+    init(name: String, surname: String, avatar : UIImage, photo : [photoAlbum], gender: gender, idGroup : Int, city: String) {
         self.name = name
-        self .sername = sername
+        self.surname = surname
         self.avatar = avatar
         self.photo = photo
         self.gender = gender
         self.idGroup = idGroup
         self.city = city
     }
-    
-    
+    init(){
+        self.name = ""
+        self.surname = ""
+        self.avatar = UIImage()
+        self.photo = [photoAlbum()]
+        self.gender = .male
+        self.idGroup = 0
+        self.city = ""
+        
+    }
 }
+struct photoAlbum{
+    var photo: UIImage?
 
+    var isLiked: Bool = false
+    var totalCount: Int = Int.random(in: 0..<999)
+    
+
+
+}
 /*
 extension userVK: Equatable {}
 func ==(lhs: userVK, rhs: userVK) -> Bool {
