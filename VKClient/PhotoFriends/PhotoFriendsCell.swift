@@ -10,6 +10,8 @@ import UIKit
 class PhotoFriendsCell: UICollectionViewCell {
 
     @IBOutlet weak var photoFriend: UIImageView!
+    @IBOutlet weak var LikeControl: LikeControl!
+    
     func setData (photo: UIImage) {
         photoFriend.image = photo
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyGroupsView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyGroupsView: UIViewController {
    
     @IBOutlet weak var myGroupsView: UITableView!
     var myGroupsData: [groupsVK] = [groupsVK]()
@@ -19,14 +19,24 @@ class MyGroupsView: UIViewController, UITableViewDelegate, UITableViewDataSource
             // Получаем ссылку на контроллер, с которого осуществлен переход
             let allGroupsView = segue.source as! AllGroupsView
             // Получаем индекс выделенной ячейки
+            
             if let indexPath = allGroupsView.allGroupsView.indexPathForSelectedRow  {
                 // Получаем группу по индексу
-                let group = allGroupsView.allGroupsData[indexPath.row]
+                
+                let key = allGroupsView.keys[indexPath.section]
+                let contact = allGroupsView.sections[key]![indexPath.row]
+                //let group = allGroupsView.allGroupsData[indexPath.row]
+              
                 // Проверяем, что такой группы нет в списке
-                if !self.myGroupsData.contains(group)
-               {
+//                if !self.myGroupsData.contains(group) {
+//                    // Добавляем группу в список выбранных
+//                    myGroupsData.append(group)
+//                    // Обновляем таблицу
+//                    myGroupsView.reloadData()
+//                   }
+                    if !self.myGroupsData.contains(contact) {
                     // Добавляем группу в список выбранных
-                    myGroupsData.append(group)
+                    myGroupsData.append(contact)
                     // Обновляем таблицу
                     myGroupsView.reloadData()
                    }
@@ -39,7 +49,8 @@ class MyGroupsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
     }
-    
+}
+extension MyGroupsView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Определяем кол-во секций
@@ -76,4 +87,8 @@ class MyGroupsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        return 60
+    }
 }
