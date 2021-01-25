@@ -167,10 +167,18 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ePj-f5-HQk">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="snk-K7-3Xp">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendsCell" rowHeight="60.333332061767578" id="W71-Wz-Yap" customClass="FriendsCell" customModule="VKClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="428" height="60.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="84" width="428" height="60.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W71-Wz-Yap" id="TE3-P0-r8O">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="60.333332061767578"/>
@@ -239,6 +247,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="lWz-MS-ujw"/>
                     <connections>
                         <outlet property="friendsTableView" destination="ePj-f5-HQk" id="Sie-1j-YiJ"/>
+                        <outlet property="searchBar" destination="snk-K7-3Xp" id="uMe-SP-DTI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tjz-Uh-UYU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -397,9 +406,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dde-fy-tgs">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="uaf-6j-fGM">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AllGroupsCell" id="TPB-Ky-VOV" customClass="AllGroupsCell" customModule="VKClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="428" height="60.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="72" width="428" height="60.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TPB-Ky-VOV" id="7f5-Bg-Obg">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="60.333332061767578"/>
@@ -460,6 +474,7 @@
                     <navigationItem key="navigationItem" title="All groups" id="WEQ-k8-Tbj"/>
                     <connections>
                         <outlet property="allGroupsView" destination="dde-fy-tgs" id="rnF-Td-koR"/>
+                        <outlet property="groupsSearchBar" destination="uaf-6j-fGM" id="2kP-9S-h1l"/>
                         <outlet property="tableAllView" destination="dde-fy-tgs" id="tqm-O1-AFC"/>
                     </connections>
                 </viewController>

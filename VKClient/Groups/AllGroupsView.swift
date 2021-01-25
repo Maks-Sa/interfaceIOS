@@ -33,32 +33,40 @@ class AllGroupsView: UIViewController {
  
     
    
-    @IBOutlet weak var allGroupsView: UITableView!
+    @IBOutlet weak var allGroupsView: UITableView!    
+    @IBOutlet weak var groupsSearchBar: UISearchBar!
     
-    var sections: [String: [groupsVK]] = [:]
+    //словарь для индексации таблицы
+    var dictGroups: [String: [groupsVK]] = [:]
+    //ключ для словаря
     var keys: [String] = []
+    //словарь для поиска
+    var dictSearch: [String: [groupsVK]] = [:]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allGroupsView.delegate = self
         allGroupsView.dataSource = self
+        groupsSearchBar.delegate = self
         
         allGroupsData.forEach { contact in
             let firstLetter = String(contact.nameGroup.first!)
-            if sections[firstLetter] != nil {
-                sections[firstLetter]!.append(contact)
+            if dictGroups[firstLetter] != nil {
+                dictGroups[firstLetter]!.append(contact)
             } else {
-                sections[firstLetter] = [contact]
+                dictGroups[firstLetter] = [contact]
             }
         }
-        keys = Array(sections.keys).sorted(by: <)
+        keys = Array(dictGroups.keys).sorted(by: <)
+        dictSearch = dictGroups
     }
 }
     
-extension AllGroupsView: UITableViewDataSource, UITableViewDelegate {
+extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return dictSearch.count
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -72,7 +80,7 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     //    return allGroupsData.count
         let key = keys[section]
-        let count = sections[key]!.count
+        let count = dictSearch[key]!.count
         return count
     }
     
@@ -80,7 +88,7 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate {
         // Получаем ячейку
           cellAllGroups = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
         let key = keys[indexPath.section]
-        let contact = sections[key]![indexPath.row]
+        let contact = dictSearch[key]![indexPath.row]
         
        // Присваиваем константам значения из массива данных
 //          let groupName = allGroupsData[indexPath.row].nameGroup
@@ -96,12 +104,33 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate {
        
           return cellAllGroups
     }
-    
-        
-   
-   
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
 
+    //Реализация поиска
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard searchText != "" else {
+            dictSearch = dictGroups
+            keys = [String] (dictSearch.keys).sorted(by: <)
+            allGroupsView.reloadData()
+            return
+        }
+        dictSearch = dictGroups.mapValues{
+            $0.filter{
+                $0.nameGroup.lowercased().contains(searchText.lowercased()) ||
+                    $0.infoGroup.lowercased().contains(searchText.lowercased())
+            }
+        }.filter {!$0.value.isEmpty}
+        keys = [String] (dictSearch.keys).sorted(by: <)
+        allGroupsView.reloadData()
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        groupsSearchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        groupsSearchBar.endEditing(true)
+    }
 }

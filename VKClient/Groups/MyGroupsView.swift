@@ -24,7 +24,7 @@ class MyGroupsView: UIViewController {
                 // Получаем группу по индексу
                 
                 let key = allGroupsView.keys[indexPath.section]
-                let contact = allGroupsView.sections[key]![indexPath.row]
+                let contact = allGroupsView.dictSearch[key]![indexPath.row]
                 //let group = allGroupsView.allGroupsData[indexPath.row]
               
                 // Проверяем, что такой группы нет в списке
