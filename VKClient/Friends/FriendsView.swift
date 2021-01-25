@@ -104,34 +104,45 @@ class FriendsView: UIViewController {
      
         
     ]
-    
-    var sections: [String: [userVK]] = [:]
-    var keys: [String] = []
+    //словарь для индексации таблицы
+    private var dictFriends: [String: [userVK]] = [:]
+    //словарь для поиска
+    private var dictSearch: [String: [userVK]] = [:]
+    //ключ для словаря
+    private var keys: [String] = []
     
     @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
+        searchBar.delegate = self
         
+        //разбираем исходный массив в словарь для индексации таблицы
         //взял твой код) спасибо
         friendsData.forEach { contact in
             let firstLetter = String(contact.surname.first!)
-            if sections[firstLetter] != nil {
-                sections[firstLetter]!.append(contact)
+            if dictFriends[firstLetter] != nil {
+                dictFriends[firstLetter]!.append(contact)
             } else {
-                sections[firstLetter] = [contact]
+                dictFriends[firstLetter] = [contact]
             }
         }
-        keys = Array(sections.keys).sorted(by: <)
-
+        keys = Array(dictFriends.keys).sorted(by: <)
+        dictSearch = dictFriends
     }
     
 }
-    extension FriendsView:  UITableViewDelegate, UITableViewDataSource {
+extension FriendsView:  UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
+    
+   
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return dictSearch.count 
+        
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -139,35 +150,34 @@ class FriendsView: UIViewController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return friendsData1.count
+
         let key = keys[section]
-        let count = sections[key]!.count
+        let count = dictSearch[key]!.count
         return count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return keys[section]
+        
     }
    
-    //заполнение ячеек данными
+    //заполнение ячеек таблицы данными
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Получаем ячейку
         let cellFriends = tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsCell
-        
+        //Получаем экземпляр класса из словаря по секции и строке
         let key = keys[indexPath.section]
-        let contact = sections[key]![indexPath.row]
+        let contact = dictSearch[key]![indexPath.row]
         
         // Присваиваем константам значения из массива данных
-//        let friendName = friendsData1[indexPath.row].name
-//        let friendSername = friendsData1[indexPath.row].surname
-//        let friendAvatar = friendsData1[indexPath.row].avatar
-//        let friendCity = friendsData1[indexPath.row].city
+
         let friendName = contact.name
         let friendSername = contact.surname
         let friendAvatar = contact.avatar
         let friendCity = contact.city
         
+    
         // Заполняем данные в ячейку через метод ячейки
         cellFriends.setData(city: friendCity, name: friendName, sername: friendSername, avatar: friendAvatar)
         
@@ -187,23 +197,41 @@ class FriendsView: UIViewController {
         // получаем ключ
         let key = keys[indexPath.section]
         // получаем экземпляр класса по ключу и номеру контакта
-        let friend = sections[key]![indexPath.row]
+        let friend = dictSearch[key]![indexPath.row]
         
-        //Замена на передачу экземпляра класса userVK
-                        /* print(indexPath.row)
-                        //присваиваем массив картинок созданному массиву картинок из целевого контроллера
-                        //photoController.imageFriend = friend.photo
-                         */
         //передаем экземпляр класса в целевой контроллер
         photoController.profileUser = friend
-
-        
         //вызываем метод искомого контроллера для отображения
         show(photoController, sender: nil)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         return 60
     }
+    
+    //Реализация поиска
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard searchText != "" else {
+            dictSearch = dictFriends
+            keys = [String] (dictSearch.keys).sorted(by: <)
+            friendsTableView.reloadData()
+            return
+        }
+        dictSearch = dictFriends.mapValues{
+            $0.filter{
+                $0.name.lowercased().contains(searchText.lowercased()) ||
+                    $0.surname.lowercased().contains(searchText.lowercased())
+            }
+        }.filter {!$0.value.isEmpty}
+        keys = [String] (dictSearch.keys).sorted(by: <)
+        friendsTableView.reloadData()
+    }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
 }
+
