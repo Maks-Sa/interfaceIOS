@@ -40,15 +40,15 @@ enum gender {
 //}
 
 
-class userVK {
+class UserVK {
     let name : String
     let surname: String
     let avatar : UIImage
-    var photo : [photoAlbum]?
+    var photo : [PhotoAlbum]?
     let gender : gender
     let idGroup : Int
     let city: String
-    init(name: String, surname: String, avatar : UIImage, photo : [photoAlbum], gender: gender, idGroup : Int, city: String) {
+    init(name: String, surname: String, avatar : UIImage, photo : [PhotoAlbum], gender: gender, idGroup : Int, city: String) {
         self.name = name
         self.surname = surname
         self.avatar = avatar
@@ -61,14 +61,14 @@ class userVK {
         self.name = ""
         self.surname = ""
         self.avatar = UIImage()
-        self.photo = [photoAlbum()]
+        self.photo = [PhotoAlbum()]
         self.gender = .male
         self.idGroup = 0
         self.city = ""
         
     }
 }
-struct photoAlbum{
+struct PhotoAlbum{
     var photo: UIImage?
 
     var isLiked: Bool = false

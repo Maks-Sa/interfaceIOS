@@ -9,7 +9,7 @@ import UIKit
 
  class ImageCell: UICollectionViewCell {
     
-    var userVK: userVK?
+    var userVK: UserVK?
     var indexCell: Int?
     var isLiked: Bool = false
     var counter: Int = 0

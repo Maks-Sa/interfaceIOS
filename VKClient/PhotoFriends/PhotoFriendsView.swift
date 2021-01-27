@@ -18,7 +18,7 @@ class PhotoFriendsView: UIViewController {
             var imageFriend: [UIImage]? = []
              */
     //создаем объект класса (профиль) для приема из другого контроллера
-    var profileUser: userVK = userVK()
+    var profileUser: UserVK = UserVK()
 
 
     override func viewDidLoad() {

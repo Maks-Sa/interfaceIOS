@@ -10,89 +10,89 @@ import UIKit
 class FriendsView: UIViewController {
     // Готовим данные для таблицы
   
-    var friendsData: [userVK] = [
-        (userVK(name: "Vash the", surname: "Stampede", avatar: UIImage(named: "trigunicon")!,
-                 photo: [photoAlbum(photo: UIImage(named: "trigunimage")!),
-                         photoAlbum(photo: UIImage(named: "vash1")!),
-                         photoAlbum(photo: UIImage(named: "vash2")!),
-                         photoAlbum(photo: UIImage(named: "vash3")!),
-                         photoAlbum(photo: UIImage(named: "vash4.jpg")!),
-                         photoAlbum(photo: UIImage(named: "vash5.jpg")!)],
+    var friendsData: [UserVK] = [
+        (UserVK(name: "Vash the", surname: "Stampede", avatar: UIImage(named: "trigunicon")!,
+                 photo: [PhotoAlbum(photo: UIImage(named: "trigunimage")!),
+                         PhotoAlbum(photo: UIImage(named: "vash1")!),
+                         PhotoAlbum(photo: UIImage(named: "vash2")!),
+                         PhotoAlbum(photo: UIImage(named: "vash3")!),
+                         PhotoAlbum(photo: UIImage(named: "vash4.jpg")!),
+                         PhotoAlbum(photo: UIImage(named: "vash5.jpg")!)],
                  gender: .male, idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Alukard", surname: "Lord", avatar: UIImage(named: "alukardicon")!,
+        (UserVK(name: "Alukard", surname: "Lord", avatar: UIImage(named: "alukardicon")!,
                  photo: [.init(photo: UIImage(named: "alukardimage")!),
                          .init(photo: UIImage(named: "alukard1")!),
                          .init(photo: UIImage(named: "alukard2")!),
                          .init(photo: UIImage(named: "alukard3")!),
                          .init(photo: UIImage(named: "alukard4")!)],
                  gender: .male, idGroup: 1, city: "Valahia")),
-        (userVK(name: "Nicholas D.", surname: "Wolfwood", avatar: UIImage(named: "wolfwood1")!,
+        (UserVK(name: "Nicholas D.", surname: "Wolfwood", avatar: UIImage(named: "wolfwood1")!,
                  photo: [.init(photo: UIImage(named: "wolfwood2")!),
                          .init(photo: UIImage(named: "wolfwood3")!)],
                  gender: .male , idGroup: 1, city: "Evergreen")),
-        (userVK(name: "Knives", surname: "Millions", avatar: UIImage(named: "knivesavatar")!,
+        (UserVK(name: "Knives", surname: "Millions", avatar: UIImage(named: "knivesavatar")!,
                  photo: [.init(photo: UIImage(named: "knives1")!),
                          .init(photo: UIImage(named: "knives2")!),
                          .init(photo: UIImage(named: "knives3")!),
                          .init(photo: UIImage(named: "knives4")!)],
                  gender: .male , idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Meryl", surname: "Stryfe", avatar: UIImage(named: "meryl0")!,
+        (UserVK(name: "Meryl", surname: "Stryfe", avatar: UIImage(named: "meryl0")!,
                  photo: [.init(photo: UIImage(named: "meryl1")!),
                          .init(photo: UIImage(named: "meryl2")!),
                          .init(photo: UIImage(named: "meryl3")!)],
                  gender: .female , idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Milly", surname: "Thompson", avatar: UIImage(named: "milly0")!,
+        (UserVK(name: "Milly", surname: "Thompson", avatar: UIImage(named: "milly0")!,
                  photo: [.init(photo: UIImage(named: "milly1")!),
                          .init(photo: UIImage(named: "milly2")!),
                          .init(photo: UIImage(named: "milly3")!)],
                  gender: .female , idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Kuroneko-sama", surname: "cat", avatar: UIImage(named: "kuroneko0")!,
+        (UserVK(name: "Kuroneko-sama", surname: "cat", avatar: UIImage(named: "kuroneko0")!,
                  photo: [.init(photo: UIImage(named: "kuroneko1")!),
                          .init(photo: UIImage(named: "kuroneko4")!),
                          .init(photo: UIImage(named: "kuroneko3")!)],
                  gender: .female , idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Sho", surname: "Cheon", avatar: UIImage(named: "shoavatar")!,
+        (UserVK(name: "Sho", surname: "Cheon", avatar: UIImage(named: "shoavatar")!,
                  photo: [.init(photo: UIImage(named: "sho1")!),
                          .init(photo: UIImage(named: "sho2")!),
                          .init(photo: UIImage(named: "sho3")!)],
                  gender: .female , idGroup: 1, city: "Gunsmoke")),
-        (userVK(name: "Ichigo", surname: "Kurosaki", avatar: UIImage(named: "ichiavatar")!,
+        (UserVK(name: "Ichigo", surname: "Kurosaki", avatar: UIImage(named: "ichiavatar")!,
                  photo: [.init(photo: UIImage(named: "ichi1")!),
                          .init(photo: UIImage(named: "ichi2")!),
                          .init(photo: UIImage(named: "ichi3")!),
                          .init(photo: UIImage(named: "ichi4")!),
                          .init(photo: UIImage(named: "ichi5")!)],
                  gender: .male, idGroup: 1, city: "Karakura")),
-        (userVK(name: "Nagisa", surname: "Furukawa", avatar: UIImage(named: "nagisa0")!,
+        (UserVK(name: "Nagisa", surname: "Furukawa", avatar: UIImage(named: "nagisa0")!,
                  photo: [.init(photo: UIImage(named: "nagisa1")!),
                          .init(photo: UIImage(named: "nagisa2")!),
                          .init(photo: UIImage(named: "nagisa3")!),
                          .init(photo: UIImage(named: "nagisa4")!),
                          .init(photo: UIImage(named: "nagisa5")!)],
                  gender: .female, idGroup: 1, city: "Tsukuba")),
-        (userVK(name: "Tomoya", surname: "Okazaki", avatar: UIImage(named: "tomoya0")!,
+        (UserVK(name: "Tomoya", surname: "Okazaki", avatar: UIImage(named: "tomoya0")!,
                  photo: [.init(photo: UIImage(named: "tomoya1")!),
                          .init(photo: UIImage(named: "tomoya2")!),
                          .init(photo: UIImage(named: "tomoya3")!),],
                  gender: .male, idGroup: 1, city: "Tsukuba")),
-        (userVK(name: "Tomoyo", surname: "Sakagami", avatar: UIImage(named: "sakagami0")!,
+        (UserVK(name: "Tomoyo", surname: "Sakagami", avatar: UIImage(named: "sakagami0")!,
                  photo: [.init(photo: UIImage(named: "sakagami1")!),
                          .init(photo: UIImage(named: "sakagami2")!),
                          .init(photo: UIImage(named: "sakagami3")!),],
                  gender: .female, idGroup: 1, city: "Tsukubaa")),
-        (userVK(name: "Raizel", surname: "Cadis Etrama", avatar: UIImage(named: "raizel0")!,
+        (UserVK(name: "Raizel", surname: "Cadis Etrama", avatar: UIImage(named: "raizel0")!,
                  photo: [.init(photo: UIImage(named: "raizel1")!),
                          .init(photo: UIImage(named: "raizel2")!),
                          .init(photo: UIImage(named: "raizel3")!),
                          .init(photo: UIImage(named: "raizel4")!),],
                  gender: .male, idGroup: 1, city: "Lukedonia")),
-        (userVK(name: "Frankenstein", surname: "The chairman", avatar: UIImage(named: "franke0")!,
+        (UserVK(name: "Frankenstein", surname: "The chairman", avatar: UIImage(named: "franke0")!,
                  photo: [.init(photo: UIImage(named: "franke1")!),
                          .init(photo: UIImage(named: "franke2")!),
                          .init(photo: UIImage(named: "franke3")!),
                          .init(photo: UIImage(named: "franke4")!),],
                  gender: .male, idGroup: 1, city: "Lukedonia")),
-        (userVK(name: "Muzaka", surname: "vervolf", avatar: UIImage(named: "muzaka0")!,
+        (UserVK(name: "Muzaka", surname: "vervolf", avatar: UIImage(named: "muzaka0")!,
                  photo: [.init(photo: UIImage(named: "muzaka1")!),
                          .init(photo: UIImage(named: "muzaka2")!),
                          .init(photo: UIImage(named: "muzaka3")!),
@@ -105,9 +105,9 @@ class FriendsView: UIViewController {
         
     ]
     //словарь для индексации таблицы
-    private var dictFriends: [String: [userVK]] = [:]
+    private var dictFriends: [String: [UserVK]] = [:]
     //словарь для поиска
-    private var dictSearch: [String: [userVK]] = [:]
+    private var dictSearch: [String: [UserVK]] = [:]
     //ключ для словаря
     private var keys: [String] = []
     
@@ -141,7 +141,7 @@ extension FriendsView:  UITableViewDelegate, UITableViewDataSource, UISearchBarD
     
    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dictSearch.count 
+        return dictSearch.count
         
     }
     
