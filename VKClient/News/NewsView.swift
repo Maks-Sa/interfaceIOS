@@ -36,8 +36,7 @@ class NewsView: UIViewController {
         super.viewDidLoad()
         newsTableView.delegate = self
         newsTableView.dataSource = self
-
-
+        //регистрируем кастомную ячейку
         newsTableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "customNewsCell")
     }
 
@@ -45,14 +44,20 @@ class NewsView: UIViewController {
 
 extension NewsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //Получаем ячейку
         let cellNews = tableView.dequeueReusableCell(withIdentifier: "customNewsCell", for: indexPath ) as! NewsCell
+       
+        // создадим константы для передачи в ячейку
         let news = newsData[indexPath.row]
         let titleNews = news.title
         let timeNews = news.timeNews
         let infoNews = news.info
         let photoNews = news.photo.photo
         
-        cellNews.setData(titleNews: titleNews, timeNews: timeNews, infoNews: infoNews, photo: photoNews!, isLike: news.photo.isLiked, likeCount: news.photo.totalCount, commCount: news.commentCount, shareCount: news.share, viewCount: news.view)
+//        cellNews.news = news
+//        cellNews.indexCell = indexPath.row
+        
+        cellNews.setData(news: news, indexCell: indexPath.row, titleNews: titleNews, timeNews: timeNews, infoNews: infoNews, photo: photoNews!, isLike: news.photo.isLiked, likeCount: news.photo.totalCount, commCount: news.commentCount, shareCount: news.share, viewCount: news.view)
         
         return cellNews
     }

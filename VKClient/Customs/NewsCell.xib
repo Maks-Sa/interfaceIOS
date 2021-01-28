@@ -14,7 +14,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="493" id="KGk-i7-Jjw" customClass="NewsCell" customModule="VKClient" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -52,7 +52,7 @@
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve4-gz-RgT">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve4-gz-RgT">
                         <rect key="frame" x="110" y="361" width="30" height="18"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
@@ -117,7 +117,7 @@
                     <constraint firstItem="gRe-48-bde" firstAttribute="top" secondItem="sss-Pr-76O" secondAttribute="bottom" constant="10" id="i0x-18-a0z"/>
                     <constraint firstItem="45M-CT-3U0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="56" id="iFC-HA-u3y"/>
                     <constraint firstAttribute="trailingMargin" secondItem="sss-Pr-76O" secondAttribute="trailing" constant="8" id="n0y-DF-X0d"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="sss-Pr-76O" secondAttribute="bottom" constant="40" id="zcI-EO-JJo"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="sss-Pr-76O" secondAttribute="bottom" priority="999" constant="40" id="zcI-EO-JJo"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
