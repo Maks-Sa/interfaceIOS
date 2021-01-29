@@ -8,9 +8,9 @@
 import UIKit
 // класс для групп
 class groupsVK {
-    let nameGroup : String
-    let iconGroup : UIImage
-    let infoGroup : String
+    let nameGroup: String
+    let iconGroup: UIImage
+    let infoGroup: String
 
     init(nameGroup: String, iconGroup: UIImage, infoGroup: String) {
         self.nameGroup = nameGroup

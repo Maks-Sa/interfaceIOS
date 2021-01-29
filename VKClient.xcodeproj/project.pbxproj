@@ -20,9 +20,10 @@
 		002DF29225C1B95400871D87 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002DF29125C1B95400871D87 /* News.swift */; };
 		0056F19025B74E6A00970092 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056F18E25B74E6A00970092 /* ImageCell.swift */; };
 		0056F19125B74E6A00970092 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0056F18F25B74E6A00970092 /* ImageCell.xib */; };
+		0069AA8F25C40AB0007DF3AD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0069AA8E25C40AB0007DF3AD /* Session.swift */; };
 		0080CEBD257F9C51007BA2F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080CEBC257F9C51007BA2F0 /* AppDelegate.swift */; };
 		0080CEBF257F9C51007BA2F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080CEBE257F9C51007BA2F0 /* SceneDelegate.swift */; };
-		0080CEC1257F9C51007BA2F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080CEC0257F9C51007BA2F0 /* ViewController.swift */; };
+		0080CEC1257F9C51007BA2F0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0080CEC0257F9C51007BA2F0 /* LoginViewController.swift */; };
 		0080CEC4257F9C51007BA2F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0080CEC2257F9C51007BA2F0 /* Main.storyboard */; };
 		0080CEC6257F9C52007BA2F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0080CEC5257F9C52007BA2F0 /* Assets.xcassets */; };
 		0080CEC9257F9C52007BA2F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0080CEC7257F9C52007BA2F0 /* LaunchScreen.storyboard */; };
@@ -45,10 +46,11 @@
 		002DF29125C1B95400871D87 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		0056F18E25B74E6A00970092 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		0056F18F25B74E6A00970092 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		0069AA8E25C40AB0007DF3AD /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0080CEB9257F9C51007BA2F0 /* VKClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0080CEBC257F9C51007BA2F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0080CEBE257F9C51007BA2F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0080CEC0257F9C51007BA2F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0080CEC0257F9C51007BA2F0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0080CEC3257F9C51007BA2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0080CEC5257F9C52007BA2F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0080CEC8257F9C52007BA2F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -123,7 +125,7 @@
 				00F05918258906CA00E06126 /* Model */,
 				0080CEBC257F9C51007BA2F0 /* AppDelegate.swift */,
 				0080CEBE257F9C51007BA2F0 /* SceneDelegate.swift */,
-				0080CEC0257F9C51007BA2F0 /* ViewController.swift */,
+				0080CEC0257F9C51007BA2F0 /* LoginViewController.swift */,
 				0080CEC2257F9C51007BA2F0 /* Main.storyboard */,
 				0080CEC5257F9C52007BA2F0 /* Assets.xcassets */,
 				0080CEC7257F9C52007BA2F0 /* LaunchScreen.storyboard */,
@@ -139,6 +141,7 @@
 				00F05944258A57DE00E06126 /* GroupsVk.swift */,
 				00F05947258A581500E06126 /* UserVk.swift */,
 				002DF29125C1B95400871D87 /* News.swift */,
+				0069AA8E25C40AB0007DF3AD /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,13 +239,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0012B04D2594E56F00D415B5 /* AllGroupsView.swift in Sources */,
-				0080CEC1257F9C51007BA2F0 /* ViewController.swift in Sources */,
+				0080CEC1257F9C51007BA2F0 /* LoginViewController.swift in Sources */,
 				0012B05B25953DBC00D415B5 /* MyGroupsCell.swift in Sources */,
 				002DF28F25C17B4200871D87 /* NewsView.swift in Sources */,
 				00E38E5525AF96BC003CD19D /* IconSettings.swift in Sources */,
 				0012B05F2595434B00D415B5 /* MyGroupsView.swift in Sources */,
 				002DF29225C1B95400871D87 /* News.swift in Sources */,
 				0080CEBD257F9C51007BA2F0 /* AppDelegate.swift in Sources */,
+				0069AA8F25C40AB0007DF3AD /* Session.swift in Sources */,
 				00F05948258A581500E06126 /* UserVk.swift in Sources */,
 				0012B0552594EE7300D415B5 /* AllGroupsCell.swift in Sources */,
 				00F05945258A57DE00E06126 /* GroupsVk.swift in Sources */,

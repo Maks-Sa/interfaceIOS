@@ -60,7 +60,13 @@ class AllGroupsView: UIViewController {
         }
         keys = Array(dictGroups.keys).sorted(by: <)
         dictSearch = dictGroups
+        //Singleton
+        startSession()
+        
     }
+    
+  
+    
 }
     
 extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
@@ -132,5 +138,11 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBar
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         groupsSearchBar.endEditing(true)
+    }
+    
+    func startSession (){
+        let session = Session.startSession
+        session.token += "+allfriends"
+        print(session.token)
     }
 }

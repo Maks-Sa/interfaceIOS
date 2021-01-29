@@ -41,12 +41,12 @@ enum gender {
 
 
 class UserVK {
-    let name : String
+    let name: String
     let surname: String
-    let avatar : UIImage
-    var photo : [PhotoAlbum]?
-    let gender : gender
-    let idGroup : Int
+    let avatar: UIImage
+    var photo: [PhotoAlbum]?
+    let gender: gender
+    let idGroup: Int
     let city: String
     init(name: String, surname: String, avatar : UIImage, photo : [PhotoAlbum], gender: gender, idGroup : Int, city: String) {
         self.name = name
