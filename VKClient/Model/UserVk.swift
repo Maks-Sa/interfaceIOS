@@ -41,6 +41,7 @@ enum gender {
 
 
 class UserVK {
+    let id: Int = 0
     let name: String
     let surname: String
     let avatar: UIImage

@@ -42,7 +42,7 @@ class NewsView: UIViewController {
         newsTableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "customNewsCell")
         
         //Singleton
-        startSession()
+//        startSession()
     }
 
 }
@@ -70,10 +70,10 @@ extension NewsView: UITableViewDelegate, UITableViewDataSource {
         return newsData.count
     }
     
-    func startSession (){
-        let session = Session.startSession
-        session.token += "+news"
-    }
+//    func startSession (){
+//        let session = Session.startSession
+//        session.token += "+news"
+//    }
     
     
     

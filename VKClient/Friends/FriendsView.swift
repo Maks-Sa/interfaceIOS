@@ -134,7 +134,7 @@ class FriendsView: UIViewController {
         keys = Array(dictFriends.keys).sorted(by: <)
         dictSearch = dictFriends
         //Singleton
-        startSession()
+//        startSession()
     }
     
 }
@@ -236,10 +236,10 @@ extension FriendsView:  UITableViewDelegate, UITableViewDataSource, UISearchBarD
         searchBar.endEditing(true)
     }
     
-    func startSession (){
-        let session = Session.startSession
-        session.token += "+friends"
-     
-    }
+//    func startSession (){
+//        let session = Session.startSession
+//        session.token += "+friends"
+//
+//    }
 }
 
