@@ -129,7 +129,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="42O-py-Tlg" kind="relationship" relationship="viewControllers" id="nIq-0J-Fb9"/>
                         <segue destination="LVK-CX-njC" kind="relationship" relationship="viewControllers" id="yfO-Fi-WCE"/>
                         <segue destination="125-Av-CmR" kind="relationship" relationship="viewControllers" id="DsF-fW-tGa"/>
                         <segue destination="0ry-ya-Xr1" kind="relationship" relationship="viewControllers" id="PLA-wr-per"/>
@@ -149,11 +148,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYQ-GO-weE">
-                                <rect key="frame" x="0.0" y="44" width="428" height="471"/>
+                                <rect key="frame" x="0.0" y="44" width="428" height="794"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="471" id="7Na-Lz-Q9r"/>
-                                </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
@@ -164,6 +160,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Hew-Xi-98L" firstAttribute="trailing" secondItem="zYQ-GO-weE" secondAttribute="trailing" priority="999" id="7gB-7b-QbB"/>
+                            <constraint firstItem="Hew-Xi-98L" firstAttribute="bottom" secondItem="zYQ-GO-weE" secondAttribute="bottom" constant="5" id="PIv-2Z-psa"/>
                             <constraint firstItem="zYQ-GO-weE" firstAttribute="leading" secondItem="Hew-Xi-98L" secondAttribute="leading" priority="999" id="kje-I3-cFX"/>
                             <constraint firstItem="zYQ-GO-weE" firstAttribute="top" secondItem="Hew-Xi-98L" secondAttribute="top" priority="999" id="pWH-kb-Z9z"/>
                         </constraints>
@@ -604,9 +601,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eoQ-ys-51c">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Mnj-qF-fkQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyGroupsCell" rowHeight="60" id="b4m-IR-cIT" customClass="MyGroupsCell" customModule="VKClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="428" height="60"/>
+                                        <rect key="frame" x="0.0" y="72" width="428" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b4m-IR-cIT" id="WOy-IY-UWV">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="60"/>
@@ -671,6 +673,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="myGroupsSearch" destination="Mnj-qF-fkQ" id="G0p-6M-Eni"/>
                         <outlet property="myGroupsView" destination="eoQ-ys-51c" id="80L-J4-67i"/>
                     </connections>
                 </viewController>

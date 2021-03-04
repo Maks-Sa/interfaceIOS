@@ -5,8 +5,18 @@
 //  Created by Maksim Savin on 16.12.2020.
 //
 
+
+//Старое, пока оставить
 import UIKit
 // класс для групп
+
+class groups {
+    var id: Int = 0
+    var name: String = ""
+    var photo_50_URL: String = ""
+    var description: String = ""
+}
+
 class groupsVK {
     let nameGroup: String
     let iconGroup: UIImage

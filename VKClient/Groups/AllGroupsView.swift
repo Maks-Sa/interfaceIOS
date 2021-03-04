@@ -13,6 +13,7 @@ class AllGroupsView: UIViewController {
 
     @IBOutlet public weak var tableAllView: UITableView!
     // Готовим данные для таблицы
+    
     var allGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне")),
                                      (groupsVK(nameGroup: "GeekBrains", iconGroup: UIImage(named: "gb0")!, infoGroup: "Учись, развивайся, стажируйся, зарабатывай!")),
                                      (groupsVK(nameGroup: "MARVEL/DC", iconGroup: UIImage(named: "md0")!, infoGroup: "Только уникальный контент")),
