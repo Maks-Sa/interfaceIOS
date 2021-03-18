@@ -32,4 +32,9 @@ class Groups: Object, Codable{
         case avatarURLGroup = "photo_50"
         case descrGroup = "description"
     }
+    
+    override static func primaryKey() -> String? {
+            return "idGroup"
+        }
+
 }

@@ -36,6 +36,7 @@ class FriendsView: UIViewController {
                 self?.friendsData = users
                 (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: users)
                 self?.friendsDict = self!.filteredFriendsDict
+                try? Database.save(items: users)
                 self?.friendsTableView.reloadData()
             }
         })

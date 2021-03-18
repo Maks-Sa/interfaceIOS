@@ -69,7 +69,9 @@ class MyGroupsView: UIViewController {
                 self?.myGroupsData = groups
                 (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: groups)
                 self?.groupsDict = self!.filteredGroupsDict
+                try? Database.save(items: groups)
                 self?.myGroupsView.reloadData()
+      
                 
 //                dump("view= \(self?.myGroupsData)")
 //                dump("view2= \(self?.filteredGroupsDict)")

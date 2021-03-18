@@ -30,11 +30,15 @@ class User: Object, Codable {
         lastName = ""
         avatarURL = ""
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
         case lastName = "last_name"
         case avatarURL = "photo_50"
     }
+    
+    override static func primaryKey() -> String? {
+            return "id"
+        }
 }

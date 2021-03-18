@@ -38,6 +38,7 @@ class PhotoFriendsView: UIViewController {
             DispatchQueue.main.async {
                 self?.userPhoto = userPhoto
 //                dump("view = \(self?.userPhoto)")
+                try? Database.save(items: userPhoto)
                 self?.photoCollectionView.reloadData()
             }
         })
