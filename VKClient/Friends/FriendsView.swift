@@ -27,20 +27,36 @@ class FriendsView: UIViewController {
         friendsTableView.delegate = self
         friendsTableView.dataSource = self
         searchBar.delegate = self
-        getData()
+        //getData()
+        getRealmData()
     }
     
-    func getData() {
+
+    
+    func getRealmData() {
         networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] users in
             DispatchQueue.main.async {
-                self?.friendsData = users
-                (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: users)
+                //Загрузка данных из realm
+                self?.friendsData = Array(try! Database.load(typeOF: User.self))
+                //Разбор данных
+                (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: self?.friendsData ?? [User]())
                 self?.friendsDict = self!.filteredFriendsDict
-                try? Database.save(items: users)
                 self?.friendsTableView.reloadData()
             }
         })
     }
+    
+//    func getData() {
+//        networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] users in
+//            DispatchQueue.main.async {
+//                self?.friendsData = users
+//                (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: users)
+//                self?.friendsDict = self!.filteredFriendsDict
+//            //    try? Database.save(items: users)
+//                self?.friendsTableView.reloadData()
+//            }
+//        })
+//    }
     
     private func prepareForSections(for inputArray: [User]) -> ([String], [String: [User]]) {
         var sectionsTitle = [String]()

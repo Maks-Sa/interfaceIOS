@@ -29,16 +29,29 @@ class PhotoFriendsView: UIViewController {
         photoCollectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "customImgCell")
         
         // получение данных через API
-        getData()
+      //  getData()
+        getRealmData()
         
     }
 
+    
+    func getRealmData() {
+        networkVK.getUserPhoto(for: profileUser.id, handler: { [weak self] userPhoto in
+            DispatchQueue.main.async {
+                self?.userPhoto = Array(try! Database.load(typeOF: UserPhoto.self).filter("userId = %@", self?.profileUser.id ?? -1)).sorted(by: {$0.datePhoto > $1.datePhoto})
+//                dump("view = \(self?.userPhoto)")
+           //     try? Database.save(items: userPhoto)
+                self?.photoCollectionView.reloadData()
+            }
+        })
+     
+    }
     func getData() {
         networkVK.getUserPhoto(for: profileUser.id, handler: { [weak self] userPhoto in
             DispatchQueue.main.async {
                 self?.userPhoto = userPhoto
 //                dump("view = \(self?.userPhoto)")
-                try? Database.save(items: userPhoto)
+           //     try? Database.save(items: userPhoto)
                 self?.photoCollectionView.reloadData()
             }
         })

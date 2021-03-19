@@ -40,6 +40,9 @@ class NetworkManager {
             if data != nil && error == nil {
                 let userResponse = try? decoder.decode(APIUserResponse.self, from: data!).response.items
                 //     print("userResponse?.items.count \(userResponse?.items.count)")
+                DispatchQueue.main.async {
+                    try? Database.save(items: userResponse!)
+                }
                 if userResponse != nil {
                     handler(userResponse!)
                 } else {
@@ -73,7 +76,6 @@ class NetworkManager {
         urlComponents.host = "api.vk.com"
         urlComponents.path = "/method/photos.getAll"
         urlComponents.queryItems = [
-            //  URLQueryItem(name: "owner_id", value: String(user.id)),
             URLQueryItem(name: "owner_id", value: String(userID)),
             URLQueryItem(name: "extended", value: "1"),
             URLQueryItem(name: "count", value: "100"),
@@ -89,6 +91,9 @@ class NetworkManager {
         let task = session.dataTask(with: url) {(data, response, error) in
             if data != nil && error == nil {
                 let photoResponse = try? decoder.decode(APIPhotoResponse.self, from: data!).response.items
+                DispatchQueue.main.async {
+                    try? Database.save(items: photoResponse!)
+                }
                 if photoResponse != nil {
   //                  dump("count sizes= \(photoResponse![0].sizesPhoto.count)")
 //                    dump("url from Network= \(photoResponse![0].sizesPhoto[0].urlPhoto)")
@@ -118,7 +123,7 @@ class NetworkManager {
             URLQueryItem(name: "fields", value: "photo_50"),
             URLQueryItem(name: "fields", value: "description"),
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "count", value: "100"),
+            URLQueryItem(name: "count", value: "111"),
             URLQueryItem(name: "access_token", value: Session.startSession.token),
             URLQueryItem(name: "v", value: vAPI)
         ]
@@ -132,6 +137,9 @@ class NetworkManager {
         let task = session.dataTask(with: url) {(data, response, error) in
             if data != nil && error == nil {
                 let groupResponse = try? decoder.decode(APIGroupsResponce.self, from: data!).response.items
+                DispatchQueue.main.async {
+                    try? Database.save(items: groupResponse!)
+                }
                 if groupResponse != nil {
 //                    dump("all groups from network = \(groupResponse)")
                     handler(groupResponse!)

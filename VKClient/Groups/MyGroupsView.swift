@@ -59,8 +59,26 @@ class MyGroupsView: UIViewController {
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
         myGroupsSearch.delegate = self
-        getData()
+       //getData()
+        getRealmData()
         
+    }
+    
+    func getRealmData() {
+        networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
+            DispatchQueue.main.async {
+                self?.myGroupsData = Array(try! Database.load(typeOF: Groups.self))
+                (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: self?.myGroupsData ?? [Groups]())
+                self?.groupsDict = self!.filteredGroupsDict
+            //    try? Database.save(items: groups)
+                self?.myGroupsView.reloadData()
+      
+                
+//                dump("view= \(self?.myGroupsData)")
+//                dump("view2= \(self?.filteredGroupsDict)")
+//                dump("view3= \(self?.keys)")
+            }
+        })
     }
     
     func getData() {
@@ -69,7 +87,7 @@ class MyGroupsView: UIViewController {
                 self?.myGroupsData = groups
                 (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: groups)
                 self?.groupsDict = self!.filteredGroupsDict
-                try? Database.save(items: groups)
+            //    try? Database.save(items: groups)
                 self?.myGroupsView.reloadData()
       
                 
