@@ -759,9 +759,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="All groups" id="WEQ-k8-Tbj"/>
                     <connections>
+                        <outlet property="allGroupsSearch" destination="uaf-6j-fGM" id="wjd-YH-yxe"/>
                         <outlet property="allGroupsView" destination="dde-fy-tgs" id="rnF-Td-koR"/>
-                        <outlet property="groupsSearchBar" destination="uaf-6j-fGM" id="2kP-9S-h1l"/>
-                        <outlet property="tableAllView" destination="dde-fy-tgs" id="tqm-O1-AFC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nor-G2-FOf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

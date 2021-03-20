@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000028F626052BB80002430B /* SearchGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000028F526052BB80002430B /* SearchGroups.swift */; };
 		0011B96525D2D769004596E6 /* LoginWebVK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0011B96425D2D769004596E6 /* LoginWebVK.swift */; };
 		0011B96925D2D8C7004596E6 /* WebVKController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0011B96825D2D8C7004596E6 /* WebVKController.swift */; };
 		0011B96C25D32F27004596E6 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0011B96B25D32F27004596E6 /* NetworkManager.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		000028F526052BB80002430B /* SearchGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGroups.swift; sourceTree = "<group>"; };
 		0011B96425D2D769004596E6 /* LoginWebVK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWebVK.swift; sourceTree = "<group>"; };
 		0011B96825D2D8C7004596E6 /* WebVKController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVKController.swift; sourceTree = "<group>"; };
 		0011B96B25D32F27004596E6 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				0054EBE825EBFA1300F1416F /* UserPhoto.swift */,
 				0054EBF225EE6CA500F1416F /* Groups.swift */,
 				0054EBF925EFAE7200F1416F /* User.swift */,
+				000028F526052BB80002430B /* SearchGroups.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				0054EBFA25EFAE7200F1416F /* User.swift in Sources */,
 				0012B05B25953DBC00D415B5 /* MyGroupsCell.swift in Sources */,
 				002DF28F25C17B4200871D87 /* NewsView.swift in Sources */,
+				000028F626052BB80002430B /* SearchGroups.swift in Sources */,
 				00E38E5525AF96BC003CD19D /* IconSettings.swift in Sources */,
 				0011B96C25D32F27004596E6 /* NetworkManager.swift in Sources */,
 				0012B05F2595434B00D415B5 /* MyGroupsView.swift in Sources */,

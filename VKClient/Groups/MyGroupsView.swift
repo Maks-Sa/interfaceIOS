@@ -13,47 +13,50 @@ class MyGroupsView: UIViewController {
     @IBOutlet weak var myGroupsSearch: UISearchBar!
     //    var myGroupsData: [groupsVK] = [groupsVK]()
     //var myGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне"))]
-    var myGroupsData: [Groups] = []
+    private var myGroupsData: [Groups] = []
     private let networkVK = NetworkManager()
     //ключ для словаря
-    var keys: [String] = []
+    private var keys: [String] = []
     //словарь для индексации таблицы
-    var groupsDict = [String: [Groups]]()
+    private var groupsDict = [String: [Groups]]()
     //словарь для поиска
-    var filteredGroupsDict = [String: [Groups]]()
-   
-//    MARK  добавление групп
-//    @IBAction func addGroup(segue: UIStoryboardSegue) {
-//        // Проверяем идентификатор, чтобы убедиться, что это нужный переход
-//        if segue.identifier == "addGroup" {
-//            // Получаем ссылку на контроллер, с которого осуществлен переход
-//            let allGroupsView = segue.source as! AllGroupsView
-//            // Получаем индекс выделенной ячейки
-//
-//            if let indexPath = allGroupsView.allGroupsView.indexPathForSelectedRow  {
-//                // Получаем группу по индексу
-//
-//                let key = allGroupsView.keys[indexPath.section]
-//                let contact = allGroupsView.dictSearch[key]![indexPath.row]
-//                //let group = allGroupsView.allGroupsData[indexPath.row]
-//
-//                // Проверяем, что такой группы нет в списке
-//                //                if !self.myGroupsData.contains(group) {
-//                //                    // Добавляем группу в список выбранных
-//                //                    myGroupsData.append(group)
-//                //                    // Обновляем таблицу
-//                //                    myGroupsView.reloadData()
-//                //                   }
-//                //                    if !self.myGroupsData.contains(contact) {
-//                //                    // Добавляем группу в список выбранных
-//                //                    myGroupsData.append(contact)
-//                // Обновляем таблицу
-//                //                    myGroupsView.reloadData()
-//                //                   }
-//            }
-//        }
-//
-//    }
+    private var filteredGroupsDict = [String: [Groups]]()
+    
+    //    MARK  добавление групп
+    @IBAction func addGroup(segue: UIStoryboardSegue) {
+        // Проверяем идентификатор, чтобы убедиться, что это нужный переход
+        if segue.identifier == "addGroup" {
+            // Получаем ссылку на контроллер, с которого осуществлен переход
+            let allGroupsView = segue.source as! AllGroupsView
+            // Получаем индекс выделенной ячейки
+            
+            if let indexPath = allGroupsView.allGroupsView.indexPathForSelectedRow  {
+                // Получаем группу по индексу
+                
+                let key = allGroupsView.keys[indexPath.section]
+                let contact = allGroupsView.filteredGroupsDict[key]![indexPath.row]
+                //                dump("contact= \(contact)")
+                
+                //                 Проверяем, что такой группы нет в списке
+                
+                if !self.myGroupsData.contains(contact) {
+                    // Добавляем группу в список выбранных
+                    myGroupsData.append(contact)
+                    DispatchQueue.main.async {
+                        try! Database.save(items: self.myGroupsData)
+//                        print("save")
+                        
+                        (self.keys, self.filteredGroupsDict) = self.prepareForSections(for: self.myGroupsData)
+                        self.groupsDict = self.filteredGroupsDict
+                        self.myGroupsView.reloadData()
+                    }
+                    //                 Обновляем таблицу
+                    //                                    myGroupsView.reloadData()
+                }
+            }
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         myGroupsView.delegate = self
@@ -64,6 +67,7 @@ class MyGroupsView: UIViewController {
         
     }
     
+  
     func getRealmData() {
         networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
             DispatchQueue.main.async {
@@ -72,7 +76,7 @@ class MyGroupsView: UIViewController {
                 self?.groupsDict = self!.filteredGroupsDict
             //    try? Database.save(items: groups)
                 self?.myGroupsView.reloadData()
-      
+//      print("get")
                 
 //                dump("view= \(self?.myGroupsData)")
 //                dump("view2= \(self?.filteredGroupsDict)")
@@ -117,6 +121,29 @@ class MyGroupsView: UIViewController {
         return (sectionsTitle, sectionData)
         
     }
+//    optimized
+//    private func prepareForSections(for inputArray: [Groups]) -> ([String], [String: [Groups]]) {
+//        var sectionsTitle = [String]()
+//        var sectionData = [String: [Groups]]()
+//
+//        //разбираем исходный массив в словарь для индексации таблицы
+//        for group in inputArray {
+//            let groupNameKey = String(group.nameGroup.prefix(1))
+//            if var groupValues = sectionData[groupNameKey] {
+//                groupValues.append(group)
+//                sectionData[groupNameKey] = groupValues
+//            } else {
+//                sectionData[groupNameKey] = [group]
+//            }
+//        }
+//        //сортируем по алфавиту
+//        sectionsTitle = [String](sectionData.keys).sorted(by: <)
+//        keys = sectionsTitle
+//        filteredGroupsDict = sectionData
+//        groupsDict = sectionData
+//        return (sectionsTitle, sectionData)
+//
+//    }
     
 }
 extension MyGroupsView: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
@@ -179,7 +206,7 @@ extension MyGroupsView: UITableViewDelegate, UITableViewDataSource, UISearchBarD
         
         return 60
     }
-    
+    //Реализация поиска
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard searchText != "" else {
             filteredGroupsDict = groupsDict

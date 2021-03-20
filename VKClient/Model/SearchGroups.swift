@@ -1,43 +1,36 @@
 //
-//  Groups.swift
+//  SearchGroups.swift
 //  VKClient
 //
-//  Created by Maksim Savin on 02.03.2021.
+//  Created by Maksim Savin on 19.03.2021.
 //
 
 import Foundation
 import RealmSwift
 
 
-struct APIGroupsResponce: Codable {
-    let response: GroupsResponse
+struct APISrchGroupsResponce: Codable {
+    let response: SrchGroupsResponse
 }
 
-struct GroupsResponse: Codable {
+struct SrchGroupsResponse: Codable {
     let count: Int
-    let items: [Groups]
+    let items: [SrchGroups]
 }
 
-class Groups: Object, Codable{
+class SrchGroups: Object, Codable{
     @objc dynamic var idGroup: Int
     @objc dynamic var nameGroup: String
     @objc dynamic var screenNameGroup: String
     @objc dynamic var avatarURLGroup: String
-    @objc dynamic var descrGroup: String
+
     
-    init(idGroup: Int, nameGroup: String, screenNameGroup: String, avatarURLGroup: String, descrGroup: String) {
-        self.idGroup = idGroup
-        self.nameGroup = nameGroup
-        self.screenNameGroup = screenNameGroup
-        self.avatarURLGroup = avatarURLGroup
-        self.descrGroup = descrGroup
-    }
     override init(){
         idGroup = 0
         nameGroup = ""
         screenNameGroup = ""
         avatarURLGroup = ""
-        descrGroup = ""
+
     }
     
     enum CodingKeys: String, CodingKey {
@@ -45,11 +38,19 @@ class Groups: Object, Codable{
         case nameGroup = "name"
         case screenNameGroup = "screen_name"
         case avatarURLGroup = "photo_50"
-        case descrGroup = "description"
     }
     
     override static func primaryKey() -> String? {
             return "idGroup"
         }
 
+    func toGroups() -> Groups {
+       
+        return Groups(idGroup: idGroup,
+                      nameGroup: nameGroup,
+                      screenNameGroup: screenNameGroup,
+                      avatarURLGroup: avatarURLGroup,
+                      descrGroup: "")
+    }
 }
+
