@@ -381,7 +381,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sername" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQf-j5-ElM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQf-j5-ElM">
                                                     <rect key="frame" x="127.33333333333334" y="8" width="292.66666666666663" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
@@ -531,29 +531,32 @@
             </objects>
             <point key="canvasLocation" x="1586" y="2069"/>
         </scene>
-        <!--View Controller-->
+        <!--ScreenName-->
         <scene sceneID="sIM-fF-Qca">
             <objects>
-                <viewController id="nYW-D7-2Do" sceneMemberID="viewController">
+                <viewController id="nYW-D7-2Do" customClass="ProfileView" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uRh-Bc-qnA">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under construction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oI-mq-oKn">
-                                <rect key="frame" x="140.66666666666666" y="455" width="146.99999999999997" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cjw-Qb-u0o">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OPr-z9-NeE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4oI-mq-oKn" firstAttribute="centerY" secondItem="OPr-z9-NeE" secondAttribute="centerY" id="QMi-ds-kIB"/>
-                            <constraint firstItem="4oI-mq-oKn" firstAttribute="centerX" secondItem="OPr-z9-NeE" secondAttribute="centerX" id="j4D-1d-Qvd"/>
+                            <constraint firstItem="Cjw-Qb-u0o" firstAttribute="leading" secondItem="OPr-z9-NeE" secondAttribute="leading" id="37n-Qe-O77"/>
+                            <constraint firstItem="Cjw-Qb-u0o" firstAttribute="top" secondItem="OPr-z9-NeE" secondAttribute="top" id="3tQ-KE-f30"/>
+                            <constraint firstItem="OPr-z9-NeE" firstAttribute="bottom" secondItem="Cjw-Qb-u0o" secondAttribute="bottom" id="Ltb-8M-A4S"/>
+                            <constraint firstItem="Cjw-Qb-u0o" firstAttribute="trailing" secondItem="OPr-z9-NeE" secondAttribute="trailing" id="wvx-aG-L2o"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Spw-6Q-0NA"/>
+                    <navigationItem key="navigationItem" title="ScreenName" id="Spw-6Q-0NA"/>
+                    <connections>
+                        <outlet property="profileTableView" destination="Cjw-Qb-u0o" id="yPS-YK-ezk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VtE-6j-ETu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

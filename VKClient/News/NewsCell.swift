@@ -85,6 +85,12 @@ class NewsCell: UITableViewCell {
         self.setCommCount(commCount: commCount)
         self.setShareCount(shareCount: shareCount)
         self.setViewCount(viewCount: viewCount)
+    //    self.imageNews.image = self.resizeImage(image: photo, targetSize: CGSize(width: 50, height: 50))
+//        self.imageNews.image = photo.imageResized(to: CGSize(width: 60, height: 50))
+//        print(self.imageNews.frame.width)
+//        print(self.imageNews.frame.height)
+//        print(self.imageNews.image?.size.width)
+//        print(self.imageNews.image?.size.height)
     }
     
     func setLikes(likesCount: Int){
@@ -139,8 +145,42 @@ class NewsCell: UITableViewCell {
         likeCount.layer.add(scaleAnimation, forKey: nil)
     }
     
+    
+    //Mark нужно ли?
+//    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+//        let size = image.size
+//
+//        let widthRatio  = targetSize.width  / size.width
+//        let heightRatio = targetSize.height / size.height
+//
+//        // Figure out what our orientation is, and use that to form the rectangle
+//        var newSize: CGSize
+//        if(widthRatio > heightRatio) {
+//            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+//        } else {
+//            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+//        }
+//
+//        // This is the rect that we've calculated out and this is what is actually used below
+//        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+//
+//        // Actually do the resizing to the rect using the ImageContext stuff
+//        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+//        image.draw(in: rect)
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return newImage!
+//    }
     // MARK
 //    что то сделать с фото, подержка нескольких фото вычисление размеров
     // добавить вычисление высоты ячейки в зависимости от размеров фото
 
+}
+extension UIImage {
+    func imageResized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }

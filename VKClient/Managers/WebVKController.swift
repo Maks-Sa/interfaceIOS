@@ -9,7 +9,7 @@ import UIKit
 
 class WebVKController: UIViewController {
     
-    var testData: [User] = []
+    var testData: [Friend] = []
 
     @IBOutlet weak var userIDLabel: UILabel!
     @IBOutlet weak var tokenLabel: UILabel!

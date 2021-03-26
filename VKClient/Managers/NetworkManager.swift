@@ -16,7 +16,7 @@ class NetworkManager {
     private let imageCache = NSCache<AnyObject, AnyObject>()
     
     //Получение списка друзей
-    func getUserFriends (for userID: Int, handler: @escaping ([User]) -> Void ) {
+    func getUserFriends (for userID: Int, handler: @escaping ([Friend]) -> Void ) {
         //собираем  URL
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -38,13 +38,13 @@ class NetworkManager {
         let decoder = JSONDecoder()
         let task = session.dataTask(with: url) { (data, response, error) in
             if data != nil && error == nil {
-                let userResponse = try? decoder.decode(APIUserResponse.self, from: data!).response.items
+                let friendResponse = try? decoder.decode(APIFriendResponse.self, from: data!).response.items
                 //     print("userResponse?.items.count \(userResponse?.items.count)")
                 DispatchQueue.main.async {
-                    try? Database.save(items: userResponse!)
+                    try? Database.save(items: friendResponse!)
                 }
-                if userResponse != nil {
-                    handler(userResponse!)
+                if friendResponse != nil {
+                    handler(friendResponse!)
                 } else {
                     print("Json parse error")
                 }
@@ -128,7 +128,7 @@ class NetworkManager {
             URLQueryItem(name: "v", value: vAPI)
         ]
         guard let url = urlComponents.url else {return}
-        print(url)
+//        print(url)
         
         //создаем сессию
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -154,7 +154,7 @@ class NetworkManager {
     }
     
 
-// MARK доделать
+
     //Получение групп по поисковому запросу
     func searchGroup(request: String, handler: @escaping ([SrchGroups]) -> Void) {
         //собираем  URL
@@ -191,38 +191,50 @@ class NetworkManager {
         }
         task.resume()
     }
+
     
-        //Получение групп по поисковому запросу
-//        func searchGroup1(request: String) {
-//            //собираем  URL
-//            var urlComponents = URLComponents()
-//            urlComponents.scheme = "https"
-//            urlComponents.host = "api.vk.com"
-//            urlComponents.path = "/method/groups.search"
-//            urlComponents.queryItems = [
-//                URLQueryItem(name: "q", value: request),
-//                URLQueryItem(name: "type", value: "group"),
-//                URLQueryItem(name: "sort", value: "0"),
-//                URLQueryItem(name: "count", value: "3"),
-//                URLQueryItem(name: "access_token", value: Session.startSession.token),
-//                URLQueryItem(name: "v", value: vAPI)
-//            ]
-//            //создаем сессию
-//            let request = URLRequest(url: urlComponents.url!)
-//            let session = URLSession(configuration: URLSessionConfiguration.default)
-//            //создаем задание
-//            let task = session.dataTask(with: request) {(data, response, error) in
-//                guard let data = data,
-//                      let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                else { return }
-//             //   print("Поиск групп - \(String(data: data, encoding: .utf8)!)")
-//                let dataString =  String(data: data, encoding: String.Encoding.utf8)
-//                print("Поиск групп  -\(json)")
-//
-//
-//            }
-//            task.resume()
-//        }
+    //Получение данных для профиля пользователя
+    func getUserProfile(for userID: Int, handler: @escaping ([User]) -> Void){
+        //собираем  URL
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/users.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "users_ids", value: String(userID)),
+            URLQueryItem(name: "fields", value: "photo_50, photo_50, about, bdate, sex, screen_name"),
+            URLQueryItem(name: "access_token", value: Session.startSession.token),
+            URLQueryItem(name: "v", value: vAPI)
+        ]
+        guard let url = urlComponents.url else {return}
+        print(url)
+        //создаем сессию
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let decoder = JSONDecoder()
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if data != nil && error == nil {
+                let userResponse = try? decoder.decode(ApiUserResponse.self, from: data!).response
+                     print("userResponse? \(userResponse)")
+                DispatchQueue.main.async {
+                    try? Database.save(items: userResponse!)
+                }
+                if userResponse != nil {
+                    handler(userResponse!)
+                } else {
+                    print("Json parse error")
+                }
+            } else {
+                print("Network error")
+            }
+        }
+        task.resume()
+    }
+    // MARK реализовать
+//    для профиля users.get
+//    стена пользователя  wall.get
+    
+    
+       
     
 }
 

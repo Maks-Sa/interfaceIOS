@@ -14,7 +14,7 @@ class PhotoFriendsView: UIViewController {
 
     @IBOutlet weak var photoCollectionView: UICollectionView!
     //создаем объект класса (профиль) для приема из другого контроллера
-    var profileUser = User()
+    var profileUser = Friend()
     private var userPhoto: [UserPhoto] = []
     private let networkVK = NetworkManager()
 
