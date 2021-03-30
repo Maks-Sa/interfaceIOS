@@ -20,12 +20,7 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var infoNews: UILabel!
     @IBOutlet weak var imageNews: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
-//    {
-//        didSet {
-//            likeButton.tintColor = .systemGray
-//            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-//        }
-//    }
+    @IBOutlet weak var iconNews: IconSettings!
     @IBOutlet weak var likeCount: UILabel! {
         didSet {
             likeCount.textColor = .systemGray
@@ -65,8 +60,8 @@ class NewsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         likeButton.addTarget(self, action: #selector(setLike), for: .touchUpInside)
-                self.layer.borderWidth = 2
-                self.layer.borderColor = UIColor.darkGray.cgColor
+//                self.layer.borderWidth = 1
+//                self.layer.borderColor = UIColor.darkGray.cgColor
         
     }
 
@@ -76,9 +71,11 @@ class NewsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setData(news: News, indexCell: Int, titleNews: String, timeNews: String, infoNews: String, photo: UIImage, isLike: Bool, likeCount: Int, commCount: Int, shareCount: Int, viewCount: Int ){
+    func setData(news: News, indexCell: Int, iconNews: UIImage, titleNews: String, timeNews: String, infoNews: String, photo: UIImage, isLike: Bool, likeCount: Int, commCount: Int, shareCount: Int, viewCount: Int ){
+        
         self.news = news
         self.indexCell = indexCell
+        self.iconNews.imageView.image = iconNews
         self.titleNews.text = titleNews
         self.timeNews.text = timeNews
         self.infoNews.text = infoNews
@@ -144,5 +141,5 @@ class NewsCell: UITableViewCell {
     
     // MARK
 //    что то сделать с фото
-//    изменить на иконка группы/друга, имя
+
 }

@@ -5,9 +5,10 @@
 //  Created by Maksim Savin on 27.01.2021.
 //
 
-import Foundation
+import UIKit
 
 struct News {
+    var icon: UIImage
     var title: String
     var timeNews: String
     var info: String

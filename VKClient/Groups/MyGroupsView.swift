@@ -10,7 +10,8 @@ import UIKit
 class MyGroupsView: UIViewController {
    
     @IBOutlet weak var myGroupsView: UITableView!
-    var myGroupsData: [groupsVK] = [groupsVK]()
+//    var myGroupsData: [groupsVK] = [groupsVK]()
+    var myGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне"))]
 
     
   @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -48,6 +49,8 @@ class MyGroupsView: UIViewController {
         super.viewDidLoad()
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
+        //Singleton
+        startSession()
     }
 }
 extension MyGroupsView: UITableViewDelegate, UITableViewDataSource {
@@ -90,5 +93,10 @@ extension MyGroupsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         return 60
+    }
+    
+    func startSession (){
+        let session = Session.startSession
+        session.token += "+myfriends"
     }
 }
