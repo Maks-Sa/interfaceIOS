@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
                 let hideKeyboardGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
                 // Присваиваем его UIScrollVIew
         scrollViewStartForm?.addGestureRecognizer(hideKeyboardGesture)
-        startSession()
+//        startSession()
     }
     @objc func hideKeyboard() {
             self.scrollViewStartForm?.endEditing(true)
@@ -111,10 +111,10 @@ class LoginViewController: UIViewController {
 //            present(alter, animated: true, completion: nil)
 //        }
 
-    func startSession (){
-        let session = Session.startSession
-        session.token = "Login"
-    }
+//    func startSession (){
+//        let session = Session.startSession
+//        session.token = "Login"
+//    }
 
     @IBOutlet weak var buttonStartForm: UIButton!
     @IBOutlet weak var scrollViewStartForm: UIScrollView!

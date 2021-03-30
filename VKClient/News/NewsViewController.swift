@@ -7,13 +7,18 @@
 
 import UIKit
 
-class NewsView: UIViewController {
+class NewsViewController: UIViewController {
     
 
     @IBOutlet weak var newsTableView: UITableView!
-
-    //готовим данные для таблицы
+    var newsPosts = [NewsPost]()
+    private let networkVK = NetworkManager()
+    var nextFrom = ""
+    var refresher: UIRefreshControl!
     
+    
+    //готовим данные для таблицы
+
     var newsData: [News] = [
         
         News(icon: UIImage(named: "trigunicon")!, title: "First News", timeNews: "10 min ago", info: "Cъешь ещё этих мягких французских булок, да выпей чаю.", photo: PhotoAlbum(photo: UIImage(named: "vash1")!)),
@@ -40,14 +45,43 @@ class NewsView: UIViewController {
         newsTableView.dataSource = self
         //регистрируем кастомную ячейку
         newsTableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "customNewsCell")
-        
+        getNews()
         //Singleton
 //        startSession()
     }
 
+    
+    func getNews() {
+        let requestTime = newsPosts.count == 0 ? 0 : (newsPosts.first?.date ?? 0)
+        networkVK.getNewsFeed(type: .post, startTime: requestTime + 1) { [weak self] (news, nextFrom) in
+            
+            print("news= \(news[2].avatarUrl)")
+            print("nextFrom= \(nextFrom)")
+//            if let self = self {
+////                DispatchQueue.main.async {
+////                    self.newsTableView.reloadData()
+////                }
+//
+//                if let nextFrom = nextFrom, self.nextFrom == "" {
+//                    self.nextFrom = nextFrom
+//                }
+//                guard news.count > 0 else { return }
+//                //новости добавляем в начало
+//                self.newsPosts = news + self.newsPosts
+//                //создаем индексы для вставки
+//                let indexPath = (0..<news.count).map {IndexPath(row: $0, section: 0)}
+//                DispatchQueue.main.async {
+//                    self.newsTableView.insertRows(at: indexPath, with: .automatic)
+//                    self.newsTableView.reloadData()
+//                }
+//
+//            }
+        }
+        
+    }
 }
 
-extension NewsView: UITableViewDelegate, UITableViewDataSource {
+extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Получаем ячейку
         let cellNews = tableView.dequeueReusableCell(withIdentifier: "customNewsCell", for: indexPath ) as! NewsCell
