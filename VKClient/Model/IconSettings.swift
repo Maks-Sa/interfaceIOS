@@ -7,7 +7,7 @@
 
 import UIKit
 
-@IBDesignable class IconSettings: UIView {
+ class IconSettings: UIView {
     //создаем переменные и константы иконки и тени
     var imageView = UIImageView()
     let shadowView = UIView()

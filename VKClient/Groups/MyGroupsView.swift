@@ -50,7 +50,7 @@ class MyGroupsView: UIViewController {
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
         //Singleton
-        startSession()
+//        startSession()
     }
 }
 extension MyGroupsView: UITableViewDelegate, UITableViewDataSource {
@@ -95,8 +95,8 @@ extension MyGroupsView: UITableViewDelegate, UITableViewDataSource {
         return 60
     }
     
-    func startSession (){
-        let session = Session.startSession
-        session.token += "+myfriends"
-    }
+//    func startSession (){
+//        let session = Session.startSession
+//        session.token += "+myfriends"
+//    }
 }
