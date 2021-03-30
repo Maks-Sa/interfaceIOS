@@ -8,13 +8,11 @@
 import UIKit
 
 class FriendsCell: UITableViewCell {
-
-    
     
     @IBOutlet weak var friendsCity: UILabel!
     @IBOutlet weak var friendsSername: UILabel!
     @IBOutlet weak var friendsName: UILabel!
-   // @IBOutlet weak var friendsAvatar: UIImageView!
+    // @IBOutlet weak var friendsAvatar: UIImageView!
     @IBOutlet weak var friendAvatar: IconSettings!
     
     // Метод для заполнения ячейки данными
@@ -22,18 +20,19 @@ class FriendsCell: UITableViewCell {
         friendsCity.text = city
         friendsSername.text = sername
         friendsName.text = name
-//        friendsAvatar.image = avatar
+        //        friendsAvatar.image = avatar
         friendAvatar.imageView.image = avatar
+        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-       
+        
+        
     }
-
+    
 }

@@ -5,39 +5,14 @@
 //  Created by Maksim Savin on 16.12.2020.
 //
 
+
+//Старое, пока оставить
 import UIKit
 enum gender {
    case male, female
 }
-//class userVK {
-//    let name : String
-//    let surname: String
-//    let avatar : UIImage
-//    let photo : [UIImage]
-//    let gender : gender
-//    let idGroup : Int
-//    let city: String
-//    init(name: String, surname: String, avatar : UIImage, photo : [UIImage], gender: gender, idGroup : Int, city: String) {
-//        self.name = name
-//        self.surname = surname
-//        self.avatar = avatar
-//        self.photo = photo
-//        self.gender = gender
-//        self.idGroup = idGroup
-//        self.city = city
-//    }
-//    init(){
-//        self.name = ""
-//        self.surname = ""
-//        self.avatar = UIImage()
-//        self.photo = [UIImage()]
-//        self.gender = .male
-//        self.idGroup = 0
-//        self.city = ""
-//    }
-//
-//
-//}
+
+
 
 
 class UserVK {
@@ -75,8 +50,6 @@ struct PhotoAlbum{
     var isLiked: Bool = false
     var totalCount: Int = Int.random(in: 0..<999)
     
-
-
 }
 /*
 extension userVK: Equatable {}

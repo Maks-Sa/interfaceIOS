@@ -9,9 +9,10 @@ import UIKit
 
  class ImageCell: UICollectionViewCell {
     
+    var userPhoto = UserPhoto()
     var userVK: UserVK?
     var indexCell: Int?
-    var isLiked: Bool = false
+    var isLiked: Int = 0
     var counter: Int = 0
 
     @IBOutlet weak var photoFriend: UIImageView!
@@ -37,10 +38,10 @@ import UIKit
 //        self.layer.borderColor = UIColor.darkGray.cgColor
     }
 
-    func setData(photo: UIImage, isLike: Bool, likeCount: Int){
+    func setData(photo: UIImage, isLike: Int, likesCount: Int){
         self.photoFriend.image = photo
-        self.setLikes(count: likeCount)
-        self.setIsLiked(bool: isLike)
+        self.setLikes(count: likesCount)
+        self.setIsLiked(int: isLike)
     }
 
     func setLikes (count: Int) {
@@ -48,9 +49,9 @@ import UIKit
         counter = count
     }
     
-    func setIsLiked (bool isLiked: Bool) {
+    func setIsLiked (int isLiked: Int) {
         self.isLiked = isLiked
-        if isLiked {
+        if isLiked == 1 {
             labelLike.textColor = .red
             buttonLike.tintColor = .red
             buttonLike.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -58,7 +59,7 @@ import UIKit
     }
             
         @objc func setLike() {
-            if !isLiked  {
+            if isLiked == 0 {
                 counter = counter + 1
                 labelLike.textColor = .red
                 buttonLike.tintColor = .red
@@ -72,9 +73,10 @@ import UIKit
             }
             animateLike()
             labelLike.text = "\(counter)"
-            userVK?.photo![indexCell!].totalCount = counter
-            userVK?.photo![indexCell!].isLiked.toggle()
-            isLiked.toggle()
+            userPhoto.likesPhoto!.likesCount = counter
+            (userPhoto.likesPhoto!.isLiked == 0) ? (userPhoto.likesPhoto!.isLiked = 1) : (userPhoto.likesPhoto!.isLiked = 0)
+            (isLiked == 0) ? (isLiked = 1) : (isLiked = 0)
+            //isLiked.toggle()
         }
     func animateLike () {
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
