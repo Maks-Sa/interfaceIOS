@@ -9,71 +9,81 @@ import UIKit
 
 class AllGroupsView: UIViewController {
    
-    public var cellAllGroups = AllGroupsCell()
-
-    @IBOutlet public weak var tableAllView: UITableView!
-    // Готовим данные для таблицы
-    
-    var allGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне")),
-                                     (groupsVK(nameGroup: "GeekBrains", iconGroup: UIImage(named: "gb0")!, infoGroup: "Учись, развивайся, стажируйся, зарабатывай!")),
-                                     (groupsVK(nameGroup: "MARVEL/DC", iconGroup: UIImage(named: "md0")!, infoGroup: "Только уникальный контент")),
-                                     (groupsVK(nameGroup: "СЛОТ", iconGroup: UIImage(named: "slot")!, infoGroup: "Слот» — российская альтернативная рок-группа ")),
-                                     (groupsVK(nameGroup: "Федерация регби Санкт-Петербурга", iconGroup: UIImage(named: "rugby")!, infoGroup: "Все о петербургском регби")),
-                                     (groupsVK(nameGroup: "Кованые топоры | УРМ «АНИКА»", iconGroup: UIImage(named: "anika")!, infoGroup: "Топоры")),
-                                     (groupsVK(nameGroup: "BIG GEEK", iconGroup: UIImage(named: "biggeek")!, infoGroup: "Гаджеты, фильмы, сериалы, игры. Без ерунды.")),
-                                     (groupsVK(nameGroup: "ДТП и ЧП | Санкт-Петербург | Питер Онлайн | СПб ", iconGroup: UIImage(named: "dtp")!, infoGroup: "Происшествия Санкт-Петербурга 24 часа в сутки, 7 дней в неделю, 365 дней в году.")),
-                                     (groupsVK(nameGroup: "Мир Discovery", iconGroup: UIImage(named: "discovery")!, infoGroup: "Весь мир как на ладони")),
-                                     (groupsVK(nameGroup: "HookahMarket»", iconGroup: UIImage(named: "hokahmarket")!, infoGroup: "")),
-                                     (groupsVK(nameGroup: "E.squirе»", iconGroup: UIImage(named: "esquire")!, infoGroup: "Умный журнал для успешных людей!")),
-                                     (groupsVK(nameGroup: "AUTO»", iconGroup: UIImage(named: "auto")!, infoGroup: "1 500 000 Автомобилистов уже с нами ;)")),
-                                     (groupsVK(nameGroup: "Wylsacom", iconGroup: UIImage(named: "wylsa")!, infoGroup: "Смотрите новый видос!"))
-                                   
-                                    
-                            
-    ]
- 
     
    
-    @IBOutlet weak var allGroupsView: UITableView!    
-    @IBOutlet weak var groupsSearchBar: UISearchBar!
+    @IBOutlet weak var allGroupsView: UITableView!
+    @IBOutlet weak var allGroupsSearch: UISearchBar!
     
-    //словарь для индексации таблицы
-    var dictGroups: [String: [groupsVK]] = [:]
+    public var cellAllGroups = AllGroupsCell()
+    var allGroupsData: [Groups] = []
+    private let networkVK = NetworkManager()
     //ключ для словаря
     var keys: [String] = []
+    //словарь для индексации таблицы
+    private var groupsDict = [String: [Groups]]()
     //словарь для поиска
-    var dictSearch: [String: [groupsVK]] = [:]
+    var filteredGroupsDict = [String: [Groups]]()
+    private var srchGroup: [SrchGroups] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allGroupsView.delegate = self
         allGroupsView.dataSource = self
-        groupsSearchBar.delegate = self
+        allGroupsSearch.delegate = self
         
-        allGroupsData.forEach { contact in
-            let firstLetter = String(contact.nameGroup.first!)
-            if dictGroups[firstLetter] != nil {
-                dictGroups[firstLetter]!.append(contact)
-            } else {
-                dictGroups[firstLetter] = [contact]
+
+        
+    }
+ 
+    func getData(searchText: String) {
+        clearTables()
+        networkVK.searchGroup(request: searchText, handler: {[weak self] groups in
+            DispatchQueue.main.async {
+                groups.forEach({self?.allGroupsData.append($0.toGroups())})
+               // self?.allGroupsData = groups.forEach({srchGroup.append($0.toGroups())})
+                
+                (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: self?.allGroupsData ?? [Groups]())
+                self?.groupsDict = self!.filteredGroupsDict
+                self?.allGroupsView.reloadData()
             }
-        }
-        keys = Array(dictGroups.keys).sorted(by: <)
-        dictSearch = dictGroups
-        //Singleton
-//        startSession()
+           
+        })
         
     }
     
+    private func prepareForSections(for inputArray: [Groups]) -> ([String], [String: [Groups]]) {
+        var sectionsTitle = [String]()
+        var sectionData = [String: [Groups]]()
+        
+        //разбираем исходный массив в словарь для индексации таблицы
+        for group in inputArray {
+            let groupNameKey = String(group.nameGroup.prefix(1))
+            if var groupValues = sectionData[groupNameKey] {
+                groupValues.append(group)
+                sectionData[groupNameKey] = groupValues
+            } else {
+                sectionData[groupNameKey] = [group]
+            }
+        }
+        //сортируем по алфавиту
+        sectionsTitle = [String](sectionData.keys).sorted(by: <)
+        return (sectionsTitle, sectionData)
+        
+    }
   
+    private func clearTables(){
+        allGroupsData.removeAll()
+        groupsDict.removeAll()
+        filteredGroupsDict.removeAll()
+    }
     
 }
     
 extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dictSearch.count
+        return filteredGroupsDict.count
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -87,7 +97,7 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBar
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     //    return allGroupsData.count
         let key = keys[section]
-        let count = dictSearch[key]!.count
+        let count = filteredGroupsDict[key]!.count
         return count
     }
     
@@ -95,18 +105,21 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBar
         // Получаем ячейку
           cellAllGroups = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
         let key = keys[indexPath.section]
-        let contact = dictSearch[key]![indexPath.row]
+        let group = filteredGroupsDict[key]![indexPath.row]
         
        // Присваиваем константам значения из массива данных
 //          let groupName = allGroupsData[indexPath.row].nameGroup
 //          let groupInfo = allGroupsData[indexPath.row].infoGroup
 //          let groupIcon = allGroupsData[indexPath.row].iconGroup
           
-        let groupName = contact.nameGroup
-        let groupInfo = contact.infoGroup
-        let groupIcon = contact.iconGroup
+        let groupName = group.nameGroup
+        let groupInfo = group.descrGroup
+        var groupIcon: UIImage?
+        networkVK.getImage(by: group.avatarURLGroup) { (image) in
+            groupIcon = image
+        }
           // Заполняем данные в ячейку через метод ячейки
-          cellAllGroups.setData(groupName: groupName, groupInfo: groupInfo, groupIcon: groupIcon)
+          cellAllGroups.setData(groupName: groupName, groupInfo: groupInfo, groupIcon: groupIcon!)
    
        
           return cellAllGroups
@@ -118,32 +131,30 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBar
 
     //Реализация поиска
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchText != "" else {
-            dictSearch = dictGroups
-            keys = [String] (dictSearch.keys).sorted(by: <)
+        guard (searchText != "" && searchText != nil) else {
+            clearTables()
+            filteredGroupsDict = groupsDict
+            keys = [String] (filteredGroupsDict.keys).sorted(by: <)
             allGroupsView.reloadData()
             return
         }
-        dictSearch = dictGroups.mapValues{
-            $0.filter{
-                $0.nameGroup.lowercased().contains(searchText.lowercased()) ||
-                    $0.infoGroup.lowercased().contains(searchText.lowercased())
-            }
-        }.filter {!$0.value.isEmpty}
-        keys = [String] (dictSearch.keys).sorted(by: <)
+//        dump(searchText)
+        getData(searchText: searchText)
+            filteredGroupsDict = groupsDict.mapValues{
+                $0.filter{
+                    $0.nameGroup.lowercased().contains(searchText.lowercased()) ||
+                        $0.screenNameGroup.lowercased().contains(searchText.lowercased())
+                }
+            }.filter {!$0.value.isEmpty}
+        keys = [String] (filteredGroupsDict.keys).sorted(by: <)
         allGroupsView.reloadData()
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        groupsSearchBar.endEditing(true)
+        allGroupsSearch.endEditing(true)
+    
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        groupsSearchBar.endEditing(true)
+        allGroupsSearch.endEditing(true)
     }
-    
-//    func startSession (){
-//        let session = Session.startSession
-//        session.token += "+allfriends"
-//        print(session.token)
-//    }
 }

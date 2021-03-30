@@ -48,6 +48,10 @@ class UserPhoto: Object, Codable {
         case likesPhoto = "likes"
         case repostsPhoto = "reposts"
     }
+    
+    override static func primaryKey() -> String? {
+            return "idPhoto"
+        }
 }
 
 class RepostsPhoto: Object, Codable {
@@ -76,6 +80,9 @@ class PhotoSize: Object, Codable {
         photoWidth = 0
     }
     
+//    override static func primaryKey() -> String? {
+//            return "urlPhoto"
+//        }
     
     enum CodingKeys: String, CodingKey {
         case heightPhoto = "height"
