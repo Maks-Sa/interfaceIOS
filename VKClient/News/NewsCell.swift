@@ -9,15 +9,16 @@ import UIKit
 
 class NewsCell: UITableViewCell {
     
-    var isLiked: Bool = false
-    var news: News?
+    var isLiked = 0
+    var news: NewsPost?
     var indexCell: Int = 0
     var counter: Int = 0
 
     
+    
+    @IBOutlet weak var postNews: UITextView!
     @IBOutlet weak var titleNews: UILabel!
     @IBOutlet weak var timeNews: UILabel!
-    @IBOutlet weak var infoNews: UILabel!
     @IBOutlet weak var imageNews: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var iconNews: IconSettings!
@@ -60,46 +61,44 @@ class NewsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         likeButton.addTarget(self, action: #selector(setLike), for: .touchUpInside)
-//                self.layer.borderWidth = 1
-//                self.layer.borderColor = UIColor.darkGray.cgColor
         
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
+    //Временно не используем
+//    func setData(news: NewsPost, indexCell: Int, iconNews: UIImage, titleNews: String, timeNews: Int, postNews: String, photo: UIImage, isLike: Int, likeCount: Int, commCount: Int, shareCount: Int, viewCount: Int ){
+//
+//        self.news = news
+//        self.indexCell = indexCell
+//        self.iconNews.imageView.image = iconNews
+//        self.titleNews.text = titleNews
+//        self.timeNews.text = dateToString(date: timeNews)
+//        self.postNews.text = postNews
+//        self.imageNews.image = photo
+//        self.setIsLikes(isLiked: isLike)
+//        self.setLikes(likesCount: likeCount)
+//        self.setCommCount(commCount: commCount)
+//        self.setShareCount(shareCount: shareCount)
+//        self.setViewCount(viewCount: viewCount)
+//    }
     
-    func setData(news: News, indexCell: Int, iconNews: UIImage, titleNews: String, timeNews: String, infoNews: String, photo: UIImage, isLike: Bool, likeCount: Int, commCount: Int, shareCount: Int, viewCount: Int ){
-        
-        self.news = news
-        self.indexCell = indexCell
-        self.iconNews.imageView.image = iconNews
-        self.titleNews.text = titleNews
-        self.timeNews.text = timeNews
-        self.infoNews.text = infoNews
-        self.imageNews.image = photo
-        self.setIsLikes(isLiked: isLike)
-        self.setLikes(likesCount: likeCount)
-        self.setCommCount(commCount: commCount)
-        self.setShareCount(shareCount: shareCount)
-        self.setViewCount(viewCount: viewCount)
-    //    self.imageNews.image = self.resizeImage(image: photo, targetSize: CGSize(width: 50, height: 50))
-//        self.imageNews.image = photo.imageResized(to: CGSize(width: 60, height: 50))
-//        print(self.imageNews.frame.width)
-//        print(self.imageNews.frame.height)
-//        print(self.imageNews.image?.size.width)
-//        print(self.imageNews.image?.size.height)
+    func dateToString(date: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.dateFormat = "HH:mm dd/MM/yyyy"
+        return dateFormatter.string(from: NSDate(timeIntervalSince1970: TimeInterval(date)) as Date)
     }
     
     func setLikes(likesCount: Int){
         self.likeCount.text = "\(likesCount)"
         counter = likesCount
     }
-    func setIsLikes(isLiked: Bool) {
+    func setIsLikes(isLiked: Int) {
         self.isLiked = isLiked
-        if isLiked {
+        if isLiked == 1 {
             likeCount.textColor = .red
             likeButton.tintColor = .red
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -117,7 +116,7 @@ class NewsCell: UITableViewCell {
     }
     
     @objc func setLike() {
-        if !isLiked {
+        if isLiked == 0 {
             counter = counter + 1
             likeCount.textColor = .red
             likeButton.tintColor = .red
@@ -130,9 +129,12 @@ class NewsCell: UITableViewCell {
         }
         animateLike()
         likeCount.text = "\(counter)"
-        news?.photo.totalCount = counter
-        news?.photo.isLiked.toggle()
-        isLiked.toggle()
+        //        news?.photo.totalCount = counter
+        //        news?.photo.isLiked.toggle()
+        news?.likesCount = counter
+        (news?.isLiked == 0) ? (news?.isLiked = 1) : (news?.isLiked = 0)
+        //isLiked.toggle()
+        (isLiked == 0) ? (isLiked = 1) : (isLiked = 0)
     }
     
     func animateLike (){
@@ -145,7 +147,11 @@ class NewsCell: UITableViewCell {
         likeCount.layer.add(scaleAnimation, forKey: nil)
     }
     
-    
+    override func prepareForReuse() {
+        postNews.text = nil
+        imageNews.image = nil
+        
+    }
     //Mark нужно ли?
 //    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
 //        let size = image.size

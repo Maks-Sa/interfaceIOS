@@ -92,21 +92,30 @@ struct NewsPostAttachment: Decodable {
         if self.type == "photo" {
             let photoContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .photo)
             let sizesArray = try photoContainer.decode([PhotoSize].self, forKey: .sizes)
-              let  maxSize = sizesArray.first(where: {$0.typePhoto == "x"}) ?? sizesArray[0]
+            let maxSize = sizesArray.first(where: {$0.typePhoto == "x"}) ?? sizesArray[0]
             
             self.url = maxSize.urlPhoto
             self.ratio = CGFloat( maxSize.photoWidth) / CGFloat( maxSize.heightPhoto)
         }
         if self.type == "video" {
-            self.url = "https://www.geirangerfjord.no/upload/images/2018_general/film-and-vid.jpg"
+            self.url = "https://i.pinimg.com/originals/55/93/f2/5593f24a1396ef54f74aab8bb595c1aa.jpg"
             self.ratio = CGFloat( 1240.0 / 711.0 )
         }
         
         if self.type == "link" {
-            self.url = "https://prettylinks.com/wp-content/uploads/2016/11/arrow_url.png"
+            self.url = "http://blog.doubletrade.ru/wp-content/uploads/2013/05/linkutili.jpg"
             self.ratio = CGFloat( 720.0 / 540.0)
         }
-
+        if self.type == "doc" {
+            self.url = "https://taxiklass.ru/wp-content/uploads/2019/06/kak-najti-okpo-i-kpp-organizatsii-po-eyo-inn.png"
+            self.ratio = CGFloat( 1240.0 / 711.0 )
+        }
+        if self.type == "posted_photo" || self.type == "audio" || self.type == "graffiti" || self.type == "note" || self.type == "app" || self.type == "poll" || self.type == "page" || self.type == "album" || self.type == "photos_list" || self.type == "market" || self.type == "market_album" || self.type == "sticker" || self.type == "pretty_cards" || self.type == "event" {
+            self.url = "https://i.pinimg.com/originals/91/b7/cd/91b7cd5596b658e7b428c9157e116a2b.jpg"
+//            "https://vsthemes.org/uploads/olives/love920s1/48/0a4845167ff0983aed6a6036c7a6f2f2.jpg"
+            self.ratio = CGFloat( 1240.0 / 711.0 )
+        }
+        
     }
     
 }
