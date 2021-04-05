@@ -9,14 +9,14 @@ import UIKit
 
 class FriendsView: UIViewController {
     private let networkVK = NetworkManager()
-    private var friendsData: [User] = []
+    private var friendsData: [Friend] = []
     
     //ключ для словаря
     var keys: [String] = []
     //словарь для индексации таблицы
-    var friendsDict = [String: [User]]()
+    var friendsDict = [String: [Friend]]()
     //словарь для поиска
-    var filteredFriendsDict = [String: [User]]()
+    var filteredFriendsDict = [String: [Friend]]()
     
     
     @IBOutlet weak var friendsTableView: UITableView!
@@ -29,17 +29,23 @@ class FriendsView: UIViewController {
         searchBar.delegate = self
         //getData()
         getRealmData()
+//        networkVK.getUserProfile(for: Session.startSession.userID!, handler: {[weak self] users in
+//            DispatchQueue.main.async {
+//                dump(users)
+//                
+//            }
+//        })
     }
     
 
     
     func getRealmData() {
-        networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] users in
+        networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] friend in
             DispatchQueue.main.async {
                 //Загрузка данных из realm
-                self?.friendsData = Array(try! Database.load(typeOF: User.self))
+                self?.friendsData = Array(try! Database.load(typeOF: Friend.self))
                 //Разбор данных
-                (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: self?.friendsData ?? [User]())
+                (self!.keys, self!.filteredFriendsDict) = self!.prepareForSections(for: self?.friendsData ?? [Friend]())
                 self?.friendsDict = self!.filteredFriendsDict
                 self?.friendsTableView.reloadData()
             }
@@ -58,9 +64,9 @@ class FriendsView: UIViewController {
 //        })
 //    }
     
-    private func prepareForSections(for inputArray: [User]) -> ([String], [String: [User]]) {
+    private func prepareForSections(for inputArray: [Friend]) -> ([String], [String: [Friend]]) {
         var sectionsTitle = [String]()
-        var sectionData = [String: [User]]()
+        var sectionData = [String: [Friend]]()
         
         //разбираем исходный массив в словарь для индексации таблицы
         for user in inputArray {

@@ -131,7 +131,7 @@ extension AllGroupsView: UITableViewDataSource, UITableViewDelegate, UISearchBar
 
     //Реализация поиска
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard (searchText != "" && searchText != nil) else {
+        guard searchText != "" else {
             clearTables()
             filteredGroupsDict = groupsDict
             keys = [String] (filteredGroupsDict.keys).sorted(by: <)

@@ -1,63 +1,50 @@
 //
-//  User.swift
+//  AboutUser.swift
 //  VKClient
 //
-//  Created by Maksim Savin on 03.03.2021.
+//  Created by Maksim Savin on 24.03.2021.
 //
 
 import Foundation
 import RealmSwift
 
-
-struct APIUserResponse: Codable {
-    var response: UserResponse
-    
-}
-struct UserResponse: Codable{
-    var count: Int
-    var items: [User]
+struct ApiUserResponse: Codable {
+    var response: [User]
 }
 
 class User: Object, Codable {
-    @objc dynamic var id: Int
+    @objc dynamic var userId: Int
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String
-    @objc dynamic var avatarURL: String
-//    @objc dynamic var city: City?
+    @objc dynamic var screenName: String
+    @objc dynamic var sex: Int
+    @objc dynamic var avatarUserUrl: String
+    @objc dynamic var bDateUser: String
+    @objc dynamic var aboutUser: String
     
     override init(){
-        id = 0
+        userId = 0
         firstName = ""
         lastName = ""
-        avatarURL = ""
-//        city = City()
+        screenName = ""
+        sex = 0
+        avatarUserUrl = ""
+        bDateUser = ""
+        aboutUser = ""
     }
-
     enum CodingKeys: String, CodingKey {
-        case id
+        case userId = "id"
         case firstName = "first_name"
         case lastName = "last_name"
-        case avatarURL = "photo_50"
-//        case city
-      //  case deactivated
+        case screenName = "screen_name"
+        case sex
+        case avatarUserUrl = "photo_50"
+        case bDateUser = "bdate"
+        case aboutUser = "about"
     }
     
     override static func primaryKey() -> String? {
-            return "id"
+            return "userId"
         }
 }
-//class City: Object, Codable {
-//    @objc dynamic var idCity: Int
-//    @objc dynamic var titleCity: String
-//
-//    override init(){
-//        idCity = 0
-//        titleCity = ""
-//    }
-//    enum CodingKeys: String, CodingKey {
-//        case idCity = "id"
-//        case titleCity = "title"
-//    }
-//}
 
-//MARK добавить City, как парсить если city нет иногда

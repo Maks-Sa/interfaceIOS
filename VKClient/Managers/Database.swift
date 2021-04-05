@@ -9,9 +9,13 @@ import Foundation
 import RealmSwift
 
 class Database {
-    
+   static var token: NotificationToken?
     static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
     
+//    init() {
+//        var db = try? Realm()
+//
+//    }
     
     static func save <T: Object> (items: [T],
                                   configuration: Realm.Configuration = deleteIfMigration,
@@ -25,7 +29,9 @@ class Database {
     
     static func load <T:Object>(typeOF: T.Type) throws -> Results<T> {
         let realm = try Realm()
-        return realm.objects(T.self)
+        let objects = realm.objects(T.self)
+        //token = objects.observe(<#T##block: (RealmCollectionChange<Results<T>>) -> Void##(RealmCollectionChange<Results<T>>) -> Void#>)
+        return objects
         
     }
 }
