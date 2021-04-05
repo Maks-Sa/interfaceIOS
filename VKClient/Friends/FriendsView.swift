@@ -29,10 +29,11 @@ class FriendsView: UIViewController {
         searchBar.delegate = self
         //getData()
         getRealmData()
+        
 //        networkVK.getUserProfile(for: Session.startSession.userID!, handler: {[weak self] users in
 //            DispatchQueue.main.async {
 //                dump(users)
-//                
+//
 //            }
 //        })
     }
