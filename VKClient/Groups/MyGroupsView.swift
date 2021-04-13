@@ -13,7 +13,7 @@ class MyGroupsView: UIViewController {
     @IBOutlet weak var myGroupsSearch: UISearchBar!
     //    var myGroupsData: [groupsVK] = [groupsVK]()
     //var myGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне"))]
-    private var myGroupsData: [Groups] = []
+    var myGroupsData: [Groups] = []
     private let networkVK = NetworkManager()
     //ключ для словаря
     private var keys: [String] = []
@@ -21,6 +21,9 @@ class MyGroupsView: UIViewController {
     private var groupsDict = [String: [Groups]]()
     //словарь для поиска
     private var filteredGroupsDict = [String: [Groups]]()
+    //операции
+    let operQ = OperationQueue()
+    let urlGroup = GetUrlOperation()
     
     //    MARK  добавление групп
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -62,12 +65,36 @@ class MyGroupsView: UIViewController {
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
         myGroupsSearch.delegate = self
-       //getData()
-        getRealmData()
+       //getRealmData()
+        setOperations()
+        getRealmDataForOperation()
         
     }
     
-  
+    func setOperations(){
+        //Полученние данных
+        let getDataOperation = GetDataOperation(url: urlGroup.createApiUrlTemplate(for: Session.startSession.userID!, method: .getGroups))
+        //Парсинг
+        let parseGroupOperation = ParseDataOperation()
+        parseGroupOperation.addDependency(getDataOperation)
+        //Сохранение в Realm
+        let saveToRealmOperation = SaveToRealmOperation()
+        saveToRealmOperation.addDependency(parseGroupOperation)
+        operQ.addOperations([getDataOperation, parseGroupOperation, saveToRealmOperation], waitUntilFinished: false)
+    }
+   
+    //получение данных из Realm для операций
+    func getRealmDataForOperation() {
+        DispatchQueue.main.async {
+            self.myGroupsData = Array(try! Database.load(typeOF: Groups.self))
+            (self.keys, self.filteredGroupsDict) = self.prepareForSections(for: self.myGroupsData )
+            self.groupsDict = self.filteredGroupsDict
+            self.myGroupsView.reloadData()
+        }
+    }
+    
+    
+    //получение данных,парсинг, сохранение в Realm, извлечение
     func getRealmData() {
         networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
             DispatchQueue.main.async {
@@ -85,6 +112,7 @@ class MyGroupsView: UIViewController {
         })
     }
     
+    //получение данных
     func getData() {
         networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
             DispatchQueue.main.async {
