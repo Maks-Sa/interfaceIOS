@@ -19,7 +19,6 @@ class GetUrlOperation {
     let vAPI = "5.145"
     //Фукция создания шаблона URL
     func createApiUrlTemplate(for userID: Int, method: ApiMethods) -> URL {
-//    func createApiUrlTemplate(for userID: Int, method: ApiMethods, handler: @escaping (URL) -> Void) {
         var urlApi = URLComponents()
         urlApi.scheme = "https"
         urlApi.host = "api.vk.com"

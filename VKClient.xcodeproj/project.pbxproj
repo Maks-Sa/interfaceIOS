@@ -23,6 +23,7 @@
 		0012B0662597EBA100D415B5 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0012B0652597EBA100D415B5 /* FriendsCell.swift */; };
 		0012B06A25993A0F00D415B5 /* PhotoFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0012B06925993A0E00D415B5 /* PhotoFriendsView.swift */; };
 		00287CB72624BCB600BAD36D /* GetUrlOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00287CB62624BCB600BAD36D /* GetUrlOperation.swift */; };
+		00287CD3262B857C00BAD36D /* PromiseNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00287CD2262B857C00BAD36D /* PromiseNetwork.swift */; };
 		002DF28A25C00FCC00871D87 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002DF28825C00FCB00871D87 /* NewsCell.swift */; };
 		002DF28B25C00FCC00871D87 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002DF28925C00FCB00871D87 /* NewsCell.xib */; };
 		002DF28F25C17B4200871D87 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002DF28E25C17B4100871D87 /* NewsViewController.swift */; };
@@ -70,6 +71,7 @@
 		0012B0652597EBA100D415B5 /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		0012B06925993A0E00D415B5 /* PhotoFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFriendsView.swift; sourceTree = "<group>"; };
 		00287CB62624BCB600BAD36D /* GetUrlOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUrlOperation.swift; sourceTree = "<group>"; };
+		00287CD2262B857C00BAD36D /* PromiseNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseNetwork.swift; sourceTree = "<group>"; };
 		002DF28825C00FCB00871D87 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		002DF28925C00FCB00871D87 /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		002DF28E25C17B4100871D87 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +147,14 @@
 			path = PhotoFriends;
 			sourceTree = "<group>";
 		};
+		00287CCD262B277800BAD36D /* Promise */ = {
+			isa = PBXGroup;
+			children = (
+				00287CD2262B857C00BAD36D /* PromiseNetwork.swift */,
+			);
+			path = Promise;
+			sourceTree = "<group>";
+		};
 		002DF28D25C17ADC00871D87 /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +217,7 @@
 		0080CEBB257F9C51007BA2F0 /* VKClient */ = {
 			isa = PBXGroup;
 			children = (
+				00287CCD262B277800BAD36D /* Promise */,
 				00E918C52620E46F002186E6 /* Operations */,
 				00002900260BDD530002430B /* Profile */,
 				0054EBF725EEBD4800F1416F /* Storyboards */,
@@ -437,6 +448,7 @@
 				00E918D62622481C002186E6 /* SaveToRealmOperation.swift in Sources */,
 				003680D1260E954800E2439F /* NewsPostCell.swift in Sources */,
 				002DF28A25C00FCC00871D87 /* NewsCell.swift in Sources */,
+				00287CD3262B857C00BAD36D /* PromiseNetwork.swift in Sources */,
 				003680D426111B7B00E2439F /* NewsFeed.swift in Sources */,
 				0056F19025B74E6A00970092 /* ImageCell.swift in Sources */,
 				0012B0662597EBA100D415B5 /* FriendsCell.swift in Sources */,

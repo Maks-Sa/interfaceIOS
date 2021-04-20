@@ -24,6 +24,7 @@ class MyGroupsView: UIViewController {
     //операции
     let operQ = OperationQueue()
     let urlGroup = GetUrlOperation()
+   
     
     //    MARK  добавление групп
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -68,11 +69,12 @@ class MyGroupsView: UIViewController {
        //getRealmData()
         setOperations()
         getRealmDataForOperation()
-        
+//        testAlam.getFriendsJson (for: Session.startSession.userID!)
     }
     
     func setOperations(){
         //Полученние данных
+      
         let getDataOperation = GetDataOperation(url: urlGroup.createApiUrlTemplate(for: Session.startSession.userID!, method: .getGroups))
         //Парсинг
         let parseGroupOperation = ParseDataOperation()
