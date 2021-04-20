@@ -12,10 +12,6 @@ class Database {
    static var token: NotificationToken?
     static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
     
-//    init() {
-//        var db = try? Realm()
-//
-//    }
     
     static func save <T: Object> (items: [T],
                                   configuration: Realm.Configuration = deleteIfMigration,
@@ -34,24 +30,12 @@ class Database {
         return objects
         
     }
+    static func delete <T:Object>(object: Results<T>) throws {
+        let realm = try Realm()
+        try realm.write {
+            realm.delete(object)
+        }
+    }
 }
 
 
-//class Database {
-//    private var db: Realm?
-//    static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-//
-//    init() {
-//        db = try? Realm()
-//        print(db?.configuration.fileURL)
-//    }
-//    func write <T: Object> (items: [T],
-//                            configuration: Realm.Configuration = deleteIfMigration,
-//                            update: Realm.UpdatePolicy = .modified) throws {
-//
-//        }
-//
-//    func read() {
-//
-//    }
-//}

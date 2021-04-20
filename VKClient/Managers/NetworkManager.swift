@@ -285,7 +285,6 @@ class NetworkManager {
                                 news.avatarUrl = profile?.photoURL ?? "https://vk.com/images/camera_50.png"
                             }
                         }
-                        
                     }
                     handler(newsPosts)
                 }
