@@ -11,8 +11,7 @@ class MyGroupsView: UIViewController {
     
     @IBOutlet weak var myGroupsView: UITableView!
     @IBOutlet weak var myGroupsSearch: UISearchBar!
-    //    var myGroupsData: [groupsVK] = [groupsVK]()
-    //var myGroupsData: [groupsVK] = [(groupsVK(nameGroup: "Burger king", iconGroup: UIImage(named: "bk0")!,infoGroup: "Готовим 100% говядину на огне"))]
+
     var myGroupsData: [Groups] = []
     private let networkVK = NetworkManager()
     //ключ для словаря
@@ -24,7 +23,7 @@ class MyGroupsView: UIViewController {
     //операции
     let operQ = OperationQueue()
     let urlGroup = GetUrlOperation()
-   
+    
     
     //    MARK  добавление групп
     @IBAction func addGroup(segue: UIStoryboardSegue) {
@@ -41,21 +40,21 @@ class MyGroupsView: UIViewController {
                 let contact = allGroupsView.filteredGroupsDict[key]![indexPath.row]
                 //                dump("contact= \(contact)")
                 
-                //                 Проверяем, что такой группы нет в списке
+                //Проверяем, что такой группы нет в списке
                 
                 if !self.myGroupsData.contains(contact) {
                     // Добавляем группу в список выбранных
                     myGroupsData.append(contact)
                     DispatchQueue.main.async {
                         try! Database.save(items: self.myGroupsData)
-//                        print("save")
+                        // print("save")
                         
                         (self.keys, self.filteredGroupsDict) = self.prepareForSections(for: self.myGroupsData)
                         self.groupsDict = self.filteredGroupsDict
+                        //Обновляем таблицу
                         self.myGroupsView.reloadData()
                     }
-                    //                 Обновляем таблицу
-                    //                                    myGroupsView.reloadData()
+                    
                 }
             }
         }
@@ -66,15 +65,15 @@ class MyGroupsView: UIViewController {
         myGroupsView.delegate = self
         myGroupsView.dataSource = self
         myGroupsSearch.delegate = self
-       //getRealmData()
+        //getRealmData()
         setOperations()
         getRealmDataForOperation()
-//        testAlam.getFriendsJson (for: Session.startSession.userID!)
+        
     }
     
     func setOperations(){
-        //Полученние данных
-      
+        //Полученние данных и сохранение в Realm
+        
         let getDataOperation = GetDataOperation(url: urlGroup.createApiUrlTemplate(for: Session.startSession.userID!, method: .getGroups))
         //Парсинг
         let parseGroupOperation = ParseDataOperation()
@@ -84,8 +83,8 @@ class MyGroupsView: UIViewController {
         saveToRealmOperation.addDependency(parseGroupOperation)
         operQ.addOperations([getDataOperation, parseGroupOperation, saveToRealmOperation], waitUntilFinished: false)
     }
-   
-    //получение данных из Realm для операций
+    
+    //получение данных из Realm 
     func getRealmDataForOperation() {
         DispatchQueue.main.async {
             self.myGroupsData = Array(try! Database.load(typeOF: Groups.self))
@@ -103,34 +102,29 @@ class MyGroupsView: UIViewController {
                 self?.myGroupsData = Array(try! Database.load(typeOF: Groups.self))
                 (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: self?.myGroupsData ?? [Groups]())
                 self?.groupsDict = self!.filteredGroupsDict
-            //    try? Database.save(items: groups)
+                //    try? Database.save(items: groups)
                 self?.myGroupsView.reloadData()
-//      print("get")
+                //      print("get")
                 
-//                dump("view= \(self?.myGroupsData)")
-//                dump("view2= \(self?.filteredGroupsDict)")
-//                dump("view3= \(self?.keys)")
+                //                dump("view= \(self?.myGroupsData)")
+                //                dump("view2= \(self?.filteredGroupsDict)")
+                //                dump("view3= \(self?.keys)")
             }
         })
     }
     
     //получение данных
-    func getData() {
-        networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
-            DispatchQueue.main.async {
-                self?.myGroupsData = groups
-                (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: groups)
-                self?.groupsDict = self!.filteredGroupsDict
-            //    try? Database.save(items: groups)
-                self?.myGroupsView.reloadData()
-      
-                
-//                dump("view= \(self?.myGroupsData)")
-//                dump("view2= \(self?.filteredGroupsDict)")
-//                dump("view3= \(self?.keys)")
-            }
-        })
-    }
+    //    func getData() {
+    //        networkVK.getGroups(for: Session.startSession.userID!, handler: {[weak self] groups in
+    //            DispatchQueue.main.async {
+    //                self?.myGroupsData = groups
+    //                (self!.keys, self!.filteredGroupsDict) = self!.prepareForSections(for: groups)
+    //                self?.groupsDict = self!.filteredGroupsDict
+    //                self?.myGroupsView.reloadData()
+    //
+    //            }
+    //        })
+    //    }
     
     private func prepareForSections(for inputArray: [Groups]) -> ([String], [String: [Groups]]) {
         var sectionsTitle = [String]()
@@ -151,35 +145,12 @@ class MyGroupsView: UIViewController {
         return (sectionsTitle, sectionData)
         
     }
-//    optimized
-//    private func prepareForSections(for inputArray: [Groups]) -> ([String], [String: [Groups]]) {
-//        var sectionsTitle = [String]()
-//        var sectionData = [String: [Groups]]()
-//
-//        //разбираем исходный массив в словарь для индексации таблицы
-//        for group in inputArray {
-//            let groupNameKey = String(group.nameGroup.prefix(1))
-//            if var groupValues = sectionData[groupNameKey] {
-//                groupValues.append(group)
-//                sectionData[groupNameKey] = groupValues
-//            } else {
-//                sectionData[groupNameKey] = [group]
-//            }
-//        }
-//        //сортируем по алфавиту
-//        sectionsTitle = [String](sectionData.keys).sorted(by: <)
-//        keys = sectionsTitle
-//        filteredGroupsDict = sectionData
-//        groupsDict = sectionData
-//        return (sectionsTitle, sectionData)
-//
-//    }
     
 }
 extension MyGroupsView: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        dump("для поиска= \(filteredGroupsDict)")
+        //        dump("для поиска= \(filteredGroupsDict)")
         return filteredGroupsDict.count
     }
     
@@ -201,9 +172,9 @@ extension MyGroupsView: UITableViewDelegate, UITableViewDataSource, UISearchBarD
         let cellMyGroups = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsCell
         let key = keys[indexPath.section]
         let group = filteredGroupsDict[key]![indexPath.row]
-//        dump("key= \(key)")
-//        dump("indexpath.row= \(indexPath.row)")
-//        dump("group= \(group)")
+        //        dump("key= \(key)")
+        //        dump("indexpath.row= \(indexPath.row)")
+        //        dump("group= \(group)")
         //Присваиваем данные из массива
         
         let groupName = group.nameGroup
@@ -255,7 +226,7 @@ extension MyGroupsView: UITableViewDelegate, UITableViewDataSource, UISearchBarD
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         myGroupsSearch.endEditing(true)
-    
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

@@ -31,6 +31,7 @@ class FriendsView: UIViewController {
         searchBar.delegate = self
         //getData()
 //        getRealmData()
+
        
         
 //   MARK     Promise
@@ -45,12 +46,9 @@ class FriendsView: UIViewController {
         }.catch { (error) in
             print(error.localizedDescription)
         }
-            
-     
-        
+    
     }
     
-
     
     func getRealmData() {
         networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] friend in

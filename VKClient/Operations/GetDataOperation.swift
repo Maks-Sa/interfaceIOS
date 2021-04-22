@@ -6,18 +6,17 @@
 //
 
 import Foundation
-import UIKit
-class GetDataOperation: AsyncOperation {
 
-    override func cancel() {
-        dataTask?.cancel()
-        super.cancel()
-    }
+class GetDataOperation: AsyncOperation {
     private var url: URL
     private var dataTask: URLSessionDataTask?
     var data: Data?
     
-    
+    override func cancel() {
+        dataTask?.cancel()
+        super.cancel()
+    }
+ 
     init(url: URL) {
         self.url = url
         super.init()

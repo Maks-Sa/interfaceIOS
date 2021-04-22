@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+
 class ParseDataOperation: Operation {
     var outputData: [Groups]?
     var decoder = JSONDecoder()
