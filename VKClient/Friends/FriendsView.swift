@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import PromiseKit
 
 class FriendsView: UIViewController {
     private let networkVK = NetworkManager()
     private var friendsData: [Friend] = []
+    private let friendsPromise = PromiseNetwork()
     
     //ключ для словаря
     var keys: [String] = []
@@ -28,17 +30,25 @@ class FriendsView: UIViewController {
         friendsTableView.dataSource = self
         searchBar.delegate = self
         //getData()
-        getRealmData()
+//        getRealmData()
+
+       
         
-//        networkVK.getUserProfile(for: Session.startSession.userID!, handler: {[weak self] users in
-//            DispatchQueue.main.async {
-//                dump(users)
-//
-//            }
-//        })
+//   MARK     Promise
+        firstly {
+            friendsPromise.getFriendsPromise(for: Session.startSession.userID!)
+        }.then { [self] (data) in
+            friendsPromise.friendsPromiseParser(with: data)
+        }.done(on: .main) { friend in
+            self.friendsData = friend
+            (self.keys, self.filteredFriendsDict) = self.prepareForSections(for: self.friendsData)
+            self.friendsTableView.reloadData()
+        }.catch { (error) in
+            print(error.localizedDescription)
+        }
+    
     }
     
-
     
     func getRealmData() {
         networkVK.getUserFriends(for: Session.startSession.userID!, handler: {[weak self] friend in
